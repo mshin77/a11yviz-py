@@ -1,4 +1,4 @@
-<img src="logo.svg" alt="a11yviz" width="320" />
+<img src="https://raw.githubusercontent.com/mshin77/a11yviz-py/main/logo.svg" alt="a11yviz Logo" align="right" width="220px"/>
 
 [![PyPI version](https://img.shields.io/pypi/v/a11yviz.svg)](https://pypi.org/project/a11yviz/)
 [![Project status: Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
