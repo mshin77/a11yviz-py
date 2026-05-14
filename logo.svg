@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" width="320" height="80" role="img" aria-label="a11yviz banner logo">
+  <title>a11yviz</title>
+  <desc>Horizontal banner: black background with yellow Aa contrast tile and yellow wordmark.</desc>
+
+  <rect x="0" y="0" width="320" height="80" fill="#000000"/>
+
+  <rect x="12" y="16" width="56" height="48" fill="#F0E442" rx="6"/>
+  <text x="40" y="56" font-family="Helvetica, Arial, sans-serif" font-size="38" font-weight="700"
+        text-anchor="middle" fill="#000000" letter-spacing="-1">Aa</text>
+
+  <text x="84" y="52" font-family="Helvetica, Arial, sans-serif" font-size="34" font-weight="700"
+        letter-spacing="-0.5" fill="#F0E442">a11yviz</text>
+</svg>

@@ -1,0 +1,185 @@
+/* a11yviz - accessible CSS for HTML widgets and Quarto/Shiny output
+   v0.1.1 - MIT - https://github.com/mshin77/a11yviz
+   Drop-in over any Bootstrap theme. Targets WCAG 2.1 AA at minimum. */
+
+
+/* === Tooltips: dark bg + light text in BOTH light/dark themes === */
+.js-plotly-plot .hovertext path,
+.js-plotly-plot .hovertext rect {
+  fill: rgba(33, 37, 41, 0.95) !important;
+  stroke: #6c757d !important;
+}
+.js-plotly-plot .hovertext text,
+.js-plotly-plot .hovertext .name,
+.js-plotly-plot .hovertext .nums {
+  fill: #f8f9fa !important;
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+}
+
+
+/* === Plotly: transparent paper/plot bg so dark-theme overrides take effect === */
+.js-plotly-plot .main-svg { background: transparent !important; }
+
+
+/* === WCAG 1.4.12 Text Spacing: line-height >= 1.5, paragraph spacing >= 2x === */
+body, p, li, dd, dt {
+  line-height: 1.6;
+}
+p, li, dd, dt {
+  letter-spacing: 0.01em;
+  word-spacing: 0.02em;
+}
+p { margin-bottom: 1em; }
+
+
+/* === Dark mode: HTML widget text (DT, flextable, gt, callouts, code-fold) === */
+.quarto-dark .dataTables_wrapper,
+.quarto-dark .dataTables_wrapper table,
+.quarto-dark .dataTables_wrapper th,
+.quarto-dark .dataTables_wrapper td,
+.quarto-dark .flextable-shadow-host,
+.quarto-dark .flextable-shadow-host table,
+.quarto-dark .flextable-shadow-host th,
+.quarto-dark .flextable-shadow-host td,
+.quarto-dark .flextable-shadow-host span,
+.quarto-dark .tabwid,
+.quarto-dark .tabwid table,
+.quarto-dark .tabwid th,
+.quarto-dark .tabwid td,
+.quarto-dark .tabwid span,
+.quarto-dark .gt_table,
+.quarto-dark .gt_table th,
+.quarto-dark .gt_table td,
+.quarto-dark .gt_table span,
+.quarto-dark .cell-output-display table,
+.quarto-dark .cell-output-display th,
+.quarto-dark .cell-output-display td,
+.quarto-dark .cell-output-display span,
+.quarto-dark .code-fold summary,
+.quarto-dark .code-fold details summary,
+.quarto-dark .code-tools-button,
+.quarto-dark .code-tools-button i,
+.quarto-dark details > summary > span,
+.quarto-dark details[open] > summary > span,
+.quarto-dark .cell .cell-code summary,
+.quarto-dark .callout,
+.quarto-dark .callout-body,
+.quarto-dark .callout-header,
+.quarto-dark .callout span,
+.quarto-dark .callout p,
+[data-bs-theme="dark"] .dataTables_wrapper,
+[data-bs-theme="dark"] .dataTables_wrapper table,
+[data-bs-theme="dark"] .dataTables_wrapper th,
+[data-bs-theme="dark"] .dataTables_wrapper td,
+[data-bs-theme="dark"] .gt_table,
+[data-bs-theme="dark"] .gt_table th,
+[data-bs-theme="dark"] .gt_table td,
+[data-bs-theme="dark"] .callout,
+[data-bs-theme="dark"] .callout-body,
+.dark .dataTables_wrapper,
+.dark .dataTables_wrapper table,
+.dark .dataTables_wrapper th,
+.dark .dataTables_wrapper td,
+.dark .gt_table,
+.dark .callout {
+  color: #dee2e6 !important;
+}
+
+
+/* === Dark mode: static plot images (ggplot, matplotlib, bayesplot, base R) === */
+.quarto-dark .cell-output-display img,
+[data-bs-theme="dark"] .cell-output-display img,
+.dark .cell-output-display img {
+  filter: invert(0.88) hue-rotate(180deg);
+}
+
+
+/* === Dark mode: DiagrammeR / grViz SVG widgets === */
+.quarto-dark .grViz,
+[data-bs-theme="dark"] .grViz,
+.dark .grViz { filter: invert(0.88) hue-rotate(180deg); }
+
+
+/* === Dark mode: Plotly widgets === */
+.quarto-dark .js-plotly-plot .bg,
+[data-bs-theme="dark"] .js-plotly-plot .bg,
+.dark .js-plotly-plot .bg { fill: #2d2d2d !important; }
+
+.quarto-dark .js-plotly-plot text,
+[data-bs-theme="dark"] .js-plotly-plot text,
+.dark .js-plotly-plot text { fill: #dee2e6 !important; }
+
+.quarto-dark .js-plotly-plot .gridlayer line,
+.quarto-dark .js-plotly-plot .zerolinelayer line,
+[data-bs-theme="dark"] .js-plotly-plot .gridlayer line,
+[data-bs-theme="dark"] .js-plotly-plot .zerolinelayer line,
+.dark .js-plotly-plot .gridlayer line,
+.dark .js-plotly-plot .zerolinelayer line { stroke: #495057 !important; }
+
+.quarto-dark .js-plotly-plot .legend,
+[data-bs-theme="dark"] .js-plotly-plot .legend,
+.dark .js-plotly-plot .legend { fill: #343a40 !important; }
+
+.quarto-dark .js-plotly-plot .legend text,
+[data-bs-theme="dark"] .js-plotly-plot .legend text,
+.dark .js-plotly-plot .legend text { fill: #dee2e6 !important; }
+
+
+/* === DT tables: scroll fallback === */
+.dataTables_wrapper { overflow-x: auto; }
+
+
+/* === WCAG 2.4.7 Focus Visible: high-contrast keyboard focus rings === */
+:focus-visible {
+  outline: 2px solid #F0E442 !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.55) !important;
+}
+a:focus-visible,
+button:focus-visible,
+.dataTables_wrapper a:focus-visible,
+.dataTables_wrapper button:focus-visible,
+.js-plotly-plot button:focus-visible,
+.panel-tabset .nav-link:focus-visible {
+  outline: 2px solid #F0E442 !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.55) !important;
+}
+
+
+/* === Responsive widget containers: fill viewport, allow shrinking === */
+.html-widget,
+.html-widget-static-bound,
+.js-plotly-plot,
+.plotly,
+.grViz,
+.dataTables_wrapper {
+  max-width: 100% !important;
+  width: 100% !important;
+  box-sizing: border-box;
+}
+
+
+/* === Tablet === */
+@media (max-width: 992px) {
+  .cell-output-display,
+  .quarto-figure {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .js-plotly-plot .legend text { font-size: 13px !important; }
+}
+
+
+/* === Mobile === */
+@media (max-width: 576px) {
+  body { font-size: 14px; }
+  .dataTables_wrapper,
+  .dataTables_wrapper table,
+  .dataTables_wrapper th,
+  .dataTables_wrapper td { font-size: 12px; }
+  .js-plotly-plot text { font-size: 12px !important; }
+  .panel-tabset .nav-tabs { flex-wrap: wrap; }
+  .panel-tabset .nav-link { padding: 0.4rem 0.6rem; font-size: 13px; }
+}
