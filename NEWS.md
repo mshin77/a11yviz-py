@@ -3,6 +3,7 @@
 * Shiny and HTML accessibility helpers added.
 * Add-on stylesheet for Shiny apps.
 * Alt-text audit now asks for a final manual check.
+* Open the demo from a local Python session with a one-line launcher.
 
 # a11yviz 0.1.1
 
@@ -15,7 +16,7 @@
 
 # a11yviz 0.1.0
 
-* First release: accessible themes, palettes, and audits for matplotlib, plotly, and Quarto.
+* First release: accessible themes, palettes, and audits for plotnine, plotly, and Quarto.
 * WCAG-tagged palettes for discrete, diverging, and sequential data, with a per-criterion audit and reference rubric.
 * Bundled stylesheet covering tooltips, dark mode, focus rings, and tables.
 * Helpers to flag colour pairs too similar to tell apart and warn when

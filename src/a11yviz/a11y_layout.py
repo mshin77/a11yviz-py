@@ -2,7 +2,7 @@
 
 from typing import Any, Optional
 
-from a11yviz._constants import WCAG_RULES
+from a11yviz._constants import wcag_rules
 from a11yviz._utils import check_level
 from a11yviz.a11y_palette import a11y_palette
 
@@ -10,8 +10,8 @@ from a11yviz.a11y_palette import a11y_palette
 def a11y_layout(p, level: str = "AA", palette: Optional[str] = "dark2_8"):
     """Apply WCAG layout styling to a plotly Figure."""
     level = check_level(level)
-    fz = WCAG_RULES["font_size"][level]
-    tt = WCAG_RULES["tooltip"]
+    fz = wcag_rules["font_size"][level]
+    tt = wcag_rules["tooltip"]
 
     body  = dict(family=tt["font"], size=fz["body"],  color="#222")
     title = dict(family=tt["font"], size=fz["title"], color="#222")

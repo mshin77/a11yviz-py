@@ -3,7 +3,7 @@
 import warnings
 from typing import Optional
 
-from a11yviz._constants import PALETTES
+from a11yviz._constants import diverging, palettes, sequential
 
 
 def a11y_palette(name: str = "dark2_8", n: Optional[int] = None,
@@ -24,25 +24,29 @@ def a11y_palette_info(name: str = "dark2_8") -> dict:
     return {"name": name, **spec}
 
 
-def a11y_palette_list() -> list[dict]:
-    """List discrete palettes as one row each."""
-    rows = [_palette_row(nm, "discrete", spec) for nm, spec in PALETTES.items()]
-    return rows
+def a11y_palette_list(type: Optional[str] = None) -> list[dict]:
+    """List discrete, diverging, and sequential palettes; filter by `type` if set."""
+    sources = {"discrete": palettes, "diverging": diverging, "sequential": sequential}
+    if type is not None and type not in sources:
+        raise ValueError(f"type must be one of {sorted(sources)}")
+    return [_palette_row(nm, kind, spec)
+            for kind, src in sources.items() if type in (None, kind)
+            for nm, spec in src.items()]
 
 
 def _palette_spec(name: str) -> dict:
-    if name not in PALETTES:
+    if name not in palettes:
         raise ValueError(
-            f"Unknown palette '{name}'. Available: {', '.join(PALETTES)}"
+            f"Unknown palette '{name}'. Available: {', '.join(palettes)}"
         )
-    return PALETTES[name]
+    return palettes[name]
 
 
 def _palette_row(name: str, type_: str, spec: dict) -> dict:
     return {
         "name":    name,
         "type":    type_,
-        "n":       len(spec["colors"]),
+        "n":       len(spec["colors"]) if type_ == "discrete" else None,
         "safe_on": spec.get("safe_on"),
         "purpose": spec.get("purpose"),
     }

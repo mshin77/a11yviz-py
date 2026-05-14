@@ -2,9 +2,9 @@
 
 from typing import Sequence, Union
 
-from a11yviz._constants import WCAG_SLUG
+from a11yviz._constants import wcag_slug
 
-_BASE = "https://www.w3.org/TR/WCAG21/"
+_base = "https://www.w3.org/TR/WCAG21/"
 
 
 def a11y_wcag_url(criterion: Union[str, Sequence[str]]):
@@ -15,5 +15,5 @@ def a11y_wcag_url(criterion: Union[str, Sequence[str]]):
 
 
 def _url(criterion: str) -> str:
-    slug = WCAG_SLUG.get(criterion)
-    return _BASE if slug is None else f"{_BASE}#{slug}"
+    slug = wcag_slug.get(criterion)
+    return _base if slug is None else f"{_base}#{slug}"

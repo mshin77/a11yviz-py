@@ -1,6 +1,6 @@
 """Accessible plotnine theme."""
 
-from a11yviz._constants import WCAG_RULES
+from a11yviz._constants import wcag_rules
 from a11yviz._utils import check_level, require_pkg
 
 
@@ -8,7 +8,7 @@ def theme_a11y(level: str = "AA", base_family: str = "", dark: bool = False):
     """Plotnine theme with WCAG contrast settings and recommended font sizes."""
     pn = require_pkg("plotnine", "theme_a11y")
     level = check_level(level)
-    fz = WCAG_RULES["font_size"][level]
+    fz = wcag_rules["font_size"][level]
     fg = "#dee2e6" if dark else "#222222"
     bg = "#2d2d2d" if dark else "#ffffff"
     grid = "#495057" if dark else "#e5e5e5"

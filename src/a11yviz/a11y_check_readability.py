@@ -4,12 +4,12 @@ import os
 import re
 from typing import Optional, Union
 
-_VOWEL_GROUP = re.compile(r"[aeiouy]+")
-_WORD_RE = re.compile(r"[A-Za-z']+")
-_SENT_RE = re.compile(r"(?<=[.!?])\s+")
-_FENCE_RE = re.compile(r"```[\s\S]*?```")
-_INLINE_RE = re.compile(r"`[^`]*`")
-_MD_PUNCT_RE = re.compile(r"[#*_>~\[\]()]")
+_vowel_group = re.compile(r"[aeiouy]+")
+_word_re = re.compile(r"[A-Za-z']+")
+_sent_re = re.compile(r"(?<=[.!?])\s+")
+_fence_re = re.compile(r"```[\s\S]*?```")
+_inline_re = re.compile(r"`[^`]*`")
+_md_punct_re = re.compile(r"[#*_>~\[\]()]")
 
 
 def a11y_check_readability(text: Union[str, os.PathLike]) -> dict:
@@ -17,8 +17,8 @@ def a11y_check_readability(text: Union[str, os.PathLike]) -> dict:
     text = _read_input(text)
     text = _strip_markdown(text)
 
-    sentences = [s for s in _SENT_RE.split(text) if s.strip()]
-    words = [w.lower() for w in _WORD_RE.findall(text)]
+    sentences = [s for s in _sent_re.split(text) if s.strip()]
+    words = [w.lower() for w in _word_re.findall(text)]
     syllables = sum(_syllable_count(w) for w in words)
 
     n_sent, n_words = len(sentences), len(words)
@@ -49,9 +49,9 @@ def _read_input(text) -> str:
 
 
 def _strip_markdown(text: str) -> str:
-    text = _FENCE_RE.sub(" ", text)
-    text = _INLINE_RE.sub(" ", text)
-    return _MD_PUNCT_RE.sub(" ", text)
+    text = _fence_re.sub(" ", text)
+    text = _inline_re.sub(" ", text)
+    return _md_punct_re.sub(" ", text)
 
 
 def _syllable_count(word: str) -> int:
@@ -60,5 +60,5 @@ def _syllable_count(word: str) -> int:
     w = word.lower()
     if len(w) > 2 and w.endswith("e") and not w.endswith("le"):
         w = w[:-1]
-    groups = _VOWEL_GROUP.findall(w)
+    groups = _vowel_group.findall(w)
     return max(1, len(groups))

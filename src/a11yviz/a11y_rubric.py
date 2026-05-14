@@ -4,7 +4,7 @@ from typing import Optional
 
 from a11yviz._utils import check_level
 
-_ROWS = [
+_rows = [
     {"criterion": "1.1.1",  "name": "Non-text Content",          "level": "A",
      "threshold_aa":  "alt text required",
      "threshold_aaa": "alt text required",
@@ -71,7 +71,7 @@ _ROWS = [
 def a11y_rubric(level: Optional[str] = None) -> list[dict]:
     """Return the chart-relevant WCAG 2.1 rubric, optionally filtered by level."""
     if level is None:
-        return [dict(r) for r in _ROWS]
+        return [dict(r) for r in _rows]
     level = check_level(level)
     keep = {"A", "AA"} | ({"AAA"} if level == "AAA" else set())
-    return [dict(r) for r in _ROWS if r["level"] in keep]
+    return [dict(r) for r in _rows if r["level"] in keep]

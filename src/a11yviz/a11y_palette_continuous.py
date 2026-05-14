@@ -2,7 +2,7 @@
 
 from typing import Optional
 
-from a11yviz._constants import DIVERGING, SEQUENTIAL
+from a11yviz._constants import diverging, sequential
 from a11yviz._utils import require_pkg
 
 
@@ -39,7 +39,7 @@ def a11y_palette_seq(name: str = "cividis", n: Optional[int] = None):
 
 
 def _lookup_continuous(name: str, kind: str) -> dict:
-    pals = {"diverging": DIVERGING, "sequential": SEQUENTIAL}[kind]
+    pals = {"diverging": diverging, "sequential": sequential}[kind]
     if name not in pals:
         raise ValueError(
             f"Unknown {kind} palette '{name}'. Available: {', '.join(pals)}"

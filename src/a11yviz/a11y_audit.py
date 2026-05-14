@@ -2,7 +2,7 @@
 
 from typing import Optional
 
-from a11yviz._constants import WCAG_RULES
+from a11yviz._constants import wcag_rules
 from a11yviz._utils import check_level
 
 
@@ -11,8 +11,9 @@ def a11y_audit(p, level: str = "AA") -> list[dict]:
     level = check_level(level)
     alt_text = getattr(p, "_a11y_alt", None) or _meta_alt(p)
     has_alt = bool(alt_text)
-    text = _check_text_size(p, level)
+    text  = _check_text_size(p, level)
     hover = _check_hover(p)
+    color = _check_color_only(p)
 
     rows = [
         _row("1.1.1", "Alt text on figure",
@@ -22,7 +23,7 @@ def a11y_audit(p, level: str = "AA") -> list[dict]:
         _row("1.3.1", "Heading hierarchy",
              "doc", "run a11y_check_headings() on the host document"),
         _row("1.4.1", "Redundant group encoding",
-             "manual", "verify category encoding is not color-only"),
+             color["status"], color["note"]),
         _row("1.4.3", "Text contrast (Min)",
              "applied", "a11y_layout() sets 4.5:1 text on 3:1 non-text"),
         _row("1.4.4", f"Recommended text size ({level} default)",
@@ -61,7 +62,7 @@ def _meta_alt(p) -> Optional[str]:
 
 
 def _check_text_size(p, level: str) -> dict:
-    threshold = WCAG_RULES["font_size"][level]["body"]
+    threshold = wcag_rules["font_size"][level]["body"]
     size = _font_size(p)
     if size is None:
         return {"status": "manual",
@@ -79,9 +80,32 @@ def _font_size(p):
 
 
 def _check_hover(p) -> dict:
+    if _is_plotnine(p):
+        return {"status": "n/a",
+                "note":   "plotnine output has no interactive hover tooltips"}
     layout = getattr(p, "layout", None)
     has = getattr(layout, "hoverlabel", None) is not None if layout else False
     return {"status": "applied" if has else "todo",
             "note":   ("hover labels styled by a11y_layout(); verify Esc dismiss + "
                        "persistent on hover" if has
                        else "call a11y_layout(); also verify Esc dismiss and persistence on hover")}
+
+
+def _check_color_only(p) -> dict:
+    if not _is_plotnine(p):
+        return {"status": "manual",
+                "note":   "verify category encoding is not color-only"}
+    mapping = getattr(p, "mapping", None) or {}
+    has_color     = any(k in mapping for k in ("color", "colour", "fill"))
+    has_redundant = any(k in mapping for k in ("shape", "linetype"))
+    if not has_color:
+        return {"status": "n/a", "note": "no color/fill aesthetic"}
+    if has_redundant:
+        return {"status": "ok",
+                "note":   "shape or linetype redundantly encodes group"}
+    return {"status": "todo",
+            "note":   "add shape= or linetype= to redundantly encode the group"}
+
+
+def _is_plotnine(p) -> bool:
+    return type(p).__module__.startswith("plotnine")

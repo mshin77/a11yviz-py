@@ -1,56 +1,44 @@
-# a11yviz (Python)
+<img src="logo.svg" alt="a11yviz" width="320" />
 
-Accessibility toolkit for [plotnine](https://plotnine.org/) and [plotly](https://plotly.com/python/) figures plus Quarto Python documents. Python sibling of [a11yviz (R)](https://github.com/mshin77/a11yviz). Targets WCAG 2.1 AA.
+[![PyPI version](https://img.shields.io/pypi/v/a11yviz.svg)](https://pypi.org/project/a11yviz/)
+[![Project status: Active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Install
+Makes charts and documents accessible across
+[plotnine](https://plotnine.org/),
+[plotly](https://plotly.com/python/), and [Quarto](https://quarto.org/)
+in Python, aligned with the [Web Content Accessibility Guidelines
+(WCAG 2.1)](https://www.w3.org/TR/WCAG21/). Includes WCAG-tagged
+palettes, alt-text scaffolds, audits, a document rubric, heading and
+reading-level checks, `shiny` ARIA helpers, and a drop-in stylesheet.
 
-```bash
-pip install -e ".[plotly,plotnine]"
-```
+R sibling: [a11yviz](https://github.com/mshin77/a11yviz).
 
-## Usage
+## Installation
+
+    pip install a11yviz
+
+## Quick start
 
 ```python
-import plotly.express as px
+from plotnine import aes, geom_point, ggplot, labs
+from plotnine.data import penguins
 import a11yviz
 
-fig = px.bar(x=["a", "b", "c"], y=[1, 3, 2])
+p = (ggplot(penguins.dropna(),
+            aes("flipper_length_mm", "body_mass_g",
+                color="species", shape="species"))
+     + geom_point()
+     + a11yviz.scale_color_a11y("dark2_8")
+     + labs(x="Flipper length (mm)", y="Body mass (g)"))
 
-# Apply a11y layout while preserving the figure's existing colors
-fig = a11yviz.a11y_plotly(fig, palette=None,
-                          alt="Bar chart of three categories.")
-
-# Audit against WCAG criteria
-for row in a11yviz.a11y_audit(fig):
-    print(row)
-
-# Quarto Python doc: embed the CSS once at the top
-from IPython.display import HTML
-HTML(f"<style>{open(a11yviz.a11y_css()).read()}</style>")
+a11yviz.a11y_alt_text(p, "Scatter of penguin body mass vs flipper length by species.")
 ```
-
-## Public API
-
-| Function | Purpose |
-|---|---|
-| `a11y_plotly(fig, palette=None, alt=None)` | One-call wrapper: layout + alt text |
-| `a11y_layout(fig, level="AA", palette=...)` | WCAG fonts, axis, hover, legend |
-| `a11y_alt_text(fig, text)` | Attach alt text to figure |
-| `a11y_aria_label(element_type, action, context=None)` | Build an ARIA label string |
-| `a11y_describe(fig, backend, attach=True)` | LLM-generated alt text (caller supplies backend) |
-| `a11y_audit(fig, level="AA")` | Per-criterion status rows |
-| `a11y_palette(name, n=None, bg=None)` | WCAG-tagged categorical palette |
-| `a11y_palette_info(name)` | Single palette spec |
-| `a11y_palette_list()` | All available palettes |
-| `a11y_css()` | Absolute path to bundled CSS |
-| `theme_a11y(level="AA", dark=False)` | Plotnine theme with WCAG contrast and font sizes |
-| `scale_color_a11y(palette)` / `scale_fill_a11y(palette)` | Plotnine categorical scales |
-| `scale_color_a11y_div(palette)` / `scale_fill_a11y_div(palette)` | Plotnine diverging scales |
-| `scale_color_a11y_seq(palette)` / `scale_fill_a11y_seq(palette)` | Plotnine sequential viridis scales |
-| `make_a11y(p, palette, alt)` | One-shot wrapper for plotnine or plotly figures |
 
 ## Citation
 
-Shin, M. (2026). *a11yviz: Accessibility toolkit for ggplot2, plotly, and Quarto* (R package version 0.1.2). <https://mshin77.github.io/a11yviz>
+Shin, M. (2026). *a11yviz: Accessibility toolkit for ggplot2, plotly, and
+Quarto* (R package version 0.1.2). <https://mshin77.github.io/a11yviz>
 
-Shin, M. (2026). *a11yviz: Accessibility toolkit for plotly and Quarto* (Python package version 0.1.2). <https://github.com/mshin77/a11yviz-py>
+Shin, M. (2026). *a11yviz: Accessibility toolkit for plotnine, plotly,
+and Quarto* (Python package version 0.1.2). <https://github.com/mshin77/a11yviz-py>

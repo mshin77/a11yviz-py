@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-title: "a11yviz (Python): Accessibility toolkit for plotly and Quarto"
+title: "a11yviz (Python): Accessibility toolkit for plotnine, plotly, and Quarto"
 message: "Please cite this software as below."
 type: software
 authors:
@@ -11,10 +11,12 @@ authors:
 version: "0.1.2"
 license: "MIT"
 repository-code: "https://github.com/mshin77/a11yviz-py"
+url: "https://mshin77.github.io/a11yviz"
 keywords:
   - accessibility
   - wcag
   - a11y
+  - plotnine
   - plotly
   - quarto
   - data-visualization

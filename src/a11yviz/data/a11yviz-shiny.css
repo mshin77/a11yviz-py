@@ -1,0 +1,71 @@
+/* a11yviz Shiny add-on
+   skip-link, screen-reader-only, prefers-reduced-motion, prefers-contrast.
+   Load alongside a11yviz.css for whole-app conformance. */
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  z-index: 9999;
+  padding: 1em 1.5em;
+  background-color: #000;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 0 0 4px 0;
+}
+
+.skip-link:focus {
+  left: 0 !important;
+  top: 0 !important;
+  outline: 3px solid #337ab7;
+  outline-offset: 2px;
+}
+
+.screen-reader-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.screen-reader-only-focusable:focus,
+.screen-reader-only-focusable:active {
+  position: static;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .btn:focus,
+  input:focus,
+  select:focus,
+  textarea:focus,
+  a:focus,
+  button:focus,
+  *:focus,
+  .plotly:focus,
+  .html-widget:focus,
+  .datatables:focus,
+  .plotly:focus-within,
+  .html-widget:focus-within,
+  .datatables:focus-within {
+    outline: 3px solid #000 !important;
+    outline-offset: 3px !important;
+  }
+}

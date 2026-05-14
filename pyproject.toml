@@ -5,12 +5,12 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "a11yviz"
 version = "0.1.2"
-description = "Accessibility toolkit for plotnine, plotly, and Quarto Python documents (WCAG 2.1 AA)."
+description = "Makes charts and documents accessible across plotnine, plotly, and Quarto in Python, aligned with the Web Content Accessibility Guidelines (WCAG 2.1)."
 readme = "README.md"
 requires-python = ">=3.9"
 license = { text = "MIT" }
 authors = [{ name = "Mikyung Shin", email = "shin.mikyung@gmail.com" }]
-keywords = ["accessibility", "wcag", "plotly", "quarto", "a11y"]
+keywords = ["accessibility", "wcag", "plotnine", "plotly", "quarto", "a11y"]
 classifiers = [
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
@@ -21,10 +21,15 @@ dependencies = []
 [project.optional-dependencies]
 plotly = ["plotly>=5.0"]
 plotnine = ["plotnine>=0.13"]
+playground = ["shiny>=1.0", "plotnine>=0.13", "pandas>=2"]
 test = ["pytest>=7", "plotly>=5.0", "plotnine>=0.13"]
+
+[project.scripts]
+a11yviz-playground = "a11yviz.run_app:main"
 
 [project.urls]
 Homepage = "https://github.com/mshin77/a11yviz-py"
+Documentation = "https://mshin77.github.io/a11yviz"
 Issues = "https://github.com/mshin77/a11yviz-py/issues"
 
 [tool.setuptools.packages.find]

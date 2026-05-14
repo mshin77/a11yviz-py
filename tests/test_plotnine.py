@@ -6,6 +6,7 @@ pn = pytest.importorskip("plotnine")
 import pandas as pd
 
 from a11yviz import (
+    a11y_audit,
     a11y_palette,
     a11y_palette_div,
     a11y_palette_seq,
@@ -38,6 +39,11 @@ def test_theme_a11y_returns_theme():
 def test_theme_a11y_dark_mode():
     t = theme_a11y(dark=True)
     assert t is not None
+
+
+def test_theme_a11y_rejects_invalid_level():
+    with pytest.raises(ValueError):
+        theme_a11y(level="A")
 
 
 # discrete scales ----------------------------------------------------------
@@ -115,3 +121,33 @@ def test_a11y_show_palette_returns_ggplot():
 def test_a11y_show_palette_aaa_level():
     p = a11y_show_palette("aaa_5", level="AAA")
     assert isinstance(p, pn.ggplot)
+
+
+# plotnine-aware audit -----------------------------------------------------
+
+def test_audit_plotnine_color_only_is_todo(gg):
+    rows = a11y_audit(gg)
+    color_row = next(r for r in rows if r["criterion"] == "1.4.1")
+    assert color_row["status"] == "todo"
+
+
+def test_audit_plotnine_redundant_shape_is_ok():
+    df = pd.DataFrame({"x": [1, 2], "y": [3, 4], "g": ["a", "b"]})
+    p = pn.ggplot(df, pn.aes("x", "y", color="g", shape="g")) + pn.geom_point()
+    rows = a11y_audit(p)
+    color_row = next(r for r in rows if r["criterion"] == "1.4.1")
+    assert color_row["status"] == "ok"
+
+
+def test_audit_plotnine_no_color_is_na():
+    df = pd.DataFrame({"x": [1, 2], "y": [3, 4]})
+    p = pn.ggplot(df, pn.aes("x", "y")) + pn.geom_point()
+    rows = a11y_audit(p)
+    color_row = next(r for r in rows if r["criterion"] == "1.4.1")
+    assert color_row["status"] == "n/a"
+
+
+def test_audit_plotnine_hover_is_na(gg):
+    rows = a11y_audit(gg)
+    hover_row = next(r for r in rows if r["criterion"] == "1.4.13")
+    assert hover_row["status"] == "n/a"

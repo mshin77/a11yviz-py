@@ -1,7 +1,7 @@
 """WCAG rules and palette specifications, mirrored from a11yviz (R)."""
 
-WCAG_RULES = {
-    "version": "0.1.0",
+wcag_rules = {
+    "version": "0.1.2",
     "wcag_version": "2.1",
     "contrast": {
         "AA":  {"text": 4.5, "nontext": 3.0},
@@ -28,7 +28,7 @@ WCAG_RULES = {
     },
 }
 
-PALETTES = {
+palettes = {
     "dark2_8": {
         "colors": ["#1B9E77", "#D95F02", "#7570B3", "#E7298A",
                    "#66A61E", "#E6AB02", "#A6761D", "#666666"],
@@ -59,31 +59,31 @@ PALETTES = {
     },
 }
 
-_RDBU_11 = ["#67001F", "#B2182B", "#D6604D", "#F4A582", "#FDDBC7",
+_rdbu_11 = ["#67001F", "#B2182B", "#D6604D", "#F4A582", "#FDDBC7",
             "#F7F7F7", "#D1E5F0", "#92C5DE", "#4393C3", "#2166AC", "#053061"]
-_PUOR_11 = ["#7F3B08", "#B35806", "#E08214", "#FDB863", "#FEE0B6",
+_puor_11 = ["#7F3B08", "#B35806", "#E08214", "#FDB863", "#FEE0B6",
             "#F7F7F7", "#D8DAEB", "#B2ABD2", "#8073AC", "#542788", "#2D004B"]
-_BRBG_11 = ["#543005", "#8C510A", "#BF812D", "#DFC27D", "#F6E8C3",
+_brbg_11 = ["#543005", "#8C510A", "#BF812D", "#DFC27D", "#F6E8C3",
             "#F5F5F5", "#C7EAE5", "#80CDC1", "#35978F", "#01665E", "#003C30"]
 
-DIVERGING = {
-    "rdbu":      {"source": "rcolorbrewer", "colors": _RDBU_11, "positions": [10, 6, 2],
+diverging = {
+    "rdbu":      {"source": "rcolorbrewer", "colors": _rdbu_11, "positions": [10, 6, 2],
                   "safe_on": "white",  "notes": "RColorBrewer RdBu. Endpoints AA on white."},
-    "puor":      {"source": "rcolorbrewer", "colors": _PUOR_11, "positions": [10, 6, 2],
+    "puor":      {"source": "rcolorbrewer", "colors": _puor_11, "positions": [10, 6, 2],
                   "safe_on": "white",  "notes": "RColorBrewer PuOr. Endpoints AA on white."},
-    "brbg":      {"source": "rcolorbrewer", "colors": _BRBG_11, "positions": [10, 6, 2],
+    "brbg":      {"source": "rcolorbrewer", "colors": _brbg_11, "positions": [10, 6, 2],
                   "safe_on": "white",  "notes": "RColorBrewer BrBG. Endpoints AA on white."},
-    "rdbu_dual": {"source": "rcolorbrewer", "colors": _RDBU_11, "positions": [9, 6, 3],
+    "rdbu_dual": {"source": "rcolorbrewer", "colors": _rdbu_11, "positions": [9, 6, 3],
                   "safe_on": "both",   "notes": "RColorBrewer RdBu mid-saturation. Endpoints clear non-text 3:1 on white and dark."},
-    "puor_dual": {"source": "rcolorbrewer", "colors": _PUOR_11, "positions": [9, 6, 3],
+    "puor_dual": {"source": "rcolorbrewer", "colors": _puor_11, "positions": [9, 6, 3],
                   "safe_on": "both",   "notes": "RColorBrewer PuOr mid-saturation. Endpoints clear non-text 3:1 on white and dark."},
-    "brbg_dual": {"source": "rcolorbrewer", "colors": _BRBG_11, "positions": [9, 6, 3],
+    "brbg_dual": {"source": "rcolorbrewer", "colors": _brbg_11, "positions": [9, 6, 3],
                   "safe_on": "both",   "notes": "RColorBrewer BrBG mid-saturation. Endpoints clear non-text 3:1 on white and dark."},
     "coolwarm_aaa": {"source": "literal", "low": "#3b4cc0", "mid": "#ffffff", "high": "#b40426",
                      "safe_on": "white", "notes": "Custom diverging. Both endpoints AAA on white."},
 }
 
-SEQUENTIAL = {
+sequential = {
     "cividis": {"source": "viridislite", "option": "cividis",
                 "safe_on": "both", "notes": "Cividis. Readable in greyscale; spans full lightness range."},
     "viridis": {"source": "viridislite", "option": "viridis",
@@ -92,7 +92,7 @@ SEQUENTIAL = {
                 "safe_on": "both", "notes": "Plasma. Higher dynamic range; emphasizes extremes."},
 }
 
-PLOTLY_SEQUENCES = {
+plotly_sequences = {
     "Plotly":  ["#636EFA", "#EF553B", "#00CC96", "#AB63FA", "#FFA15A",
                 "#19D3F3", "#FF6692", "#B6E880", "#FF97FF", "#FECB52"],
     "D3":      ["#1F77B4", "#FF7F0E", "#2CA02C", "#D62728", "#9467BD",
@@ -109,7 +109,7 @@ PLOTLY_SEQUENCES = {
                 "#9EB9F3", "#FE88B1", "#C9DB74", "#8BE0A4", "#B497E7", "#D3B484", "#B3B3B3"],
 }
 
-WCAG_SLUG = {
+wcag_slug = {
     "1.1.1":  "non-text-content",
     "1.3.1":  "info-and-relationships",
     "1.4.1":  "use-of-color",

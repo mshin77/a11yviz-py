@@ -3,10 +3,10 @@
 import os
 import re
 
-_HEADING_MD_RE = re.compile(r"^(#{1,6})(\s|$)")
-_FENCE_RE = re.compile(r"^```")
-_HEADING_HTML_RE = re.compile(r"<h([1-6])[^>]*>(.*?)</h\1>", re.IGNORECASE | re.DOTALL)
-_TAG_RE = re.compile(r"<[^>]+>")
+_heading_md_re = re.compile(r"^(#{1,6})(\s|$)")
+_fence_re = re.compile(r"^```")
+_heading_html_re = re.compile(r"<h([1-6])[^>]*>(.*?)</h\1>", re.IGNORECASE | re.DOTALL)
+_tag_re = re.compile(r"<[^>]+>")
 
 
 def a11y_check_headings(path: os.PathLike, min_chars: int = 3) -> list[dict]:
@@ -35,7 +35,7 @@ def _parse_headings_md(path: str) -> list[dict]:
     in_fence = [False] * len(lines)
     fence_open = False
     for i, line in enumerate(lines):
-        if _FENCE_RE.match(line) and not in_yaml[i]:
+        if _fence_re.match(line) and not in_yaml[i]:
             in_fence[i] = True
             fence_open = not fence_open
             continue
@@ -45,7 +45,7 @@ def _parse_headings_md(path: str) -> list[dict]:
     for i, line in enumerate(lines):
         if in_yaml[i] or in_fence[i]:
             continue
-        m = _HEADING_MD_RE.match(line)
+        m = _heading_md_re.match(line)
         if not m:
             continue
         level = len(m.group(1))
@@ -70,9 +70,9 @@ def _parse_headings_html(path: str) -> list[dict]:
     with open(path, encoding="utf-8") as fh:
         raw = fh.read()
     rows = []
-    for match in _HEADING_HTML_RE.finditer(raw):
+    for match in _heading_html_re.finditer(raw):
         level = int(match.group(1))
-        body = _TAG_RE.sub("", match.group(2)).strip()
+        body = _tag_re.sub("", match.group(2)).strip()
         line = raw.count("\n", 0, match.start()) + 1
         rows.append({"line": line, "level": level, "text": body})
     return rows

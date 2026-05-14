@@ -4,7 +4,7 @@ from typing import Iterable, Sequence, Union
 
 from a11yviz._utils import alpha_composite, contrast_ratio
 
-_LEVELS = {"AA": 4.5, "AAA": 7.0, "AA-large": 3.0}
+_levels = {"AA": 4.5, "AAA": 7.0, "AA-large": 3.0}
 
 
 def a11y_check_palette(colors: Sequence[str],
@@ -12,9 +12,9 @@ def a11y_check_palette(colors: Sequence[str],
                        level: str = "AA",
                        alpha: float = 1.0) -> list[dict]:
     """Return per-color contrast rows against one or more backgrounds."""
-    if level not in _LEVELS:
-        raise ValueError(f"level must be one of {sorted(_LEVELS)}")
-    threshold = _LEVELS[level]
+    if level not in _levels:
+        raise ValueError(f"level must be one of {sorted(_levels)}")
+    threshold = _levels[level]
     bg_list = [bg] if isinstance(bg, str) else list(bg)
 
     rows = []
