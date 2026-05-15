@@ -1,24 +1,23 @@
+# a11yviz 0.1.3
+
+* Color and fill scales accept the WCAG level.
+* Walkthroughs run in the browser without fetching the package.
+* Walkthrough audit tables share one format and stretch to full width.
+
 # a11yviz 0.1.2
 
-* Shiny and HTML accessibility helpers added.
-* Add-on stylesheet for Shiny apps.
-* Alt-text audit now asks for a final manual check.
-* Open the demo from a local Python session with a one-line launcher.
+* Accessibility helpers for Shiny apps, plus an add-on stylesheet.
+* Alt-text audit asks for a final manual check.
+* Launch the demo from a local session with one line.
 
 # a11yviz 0.1.1
 
 * Documentation hyperlinks corrected.
-* `check_overlap()` for scatter overlap (WCAG Success Criterion 1.3.1).
-* `css` alias for parity with R `a11y_css()`.
-* WCAG citations use `Success Criterion X.X.X` form.
-* Defensive validation removed; bad input fails at the natural site.
-* Vignette tables share a single `dt_options` dict.
+* New check for scatter overlap.
+* Bad input now fails where it occurs instead of being caught up front.
 
 # a11yviz 0.1.0
 
 * First release: accessible themes, palettes, and audits for plotnine, plotly, and Quarto.
-* WCAG-tagged palettes for discrete, diverging, and sequential data, with a per-criterion audit and reference rubric.
-* Bundled stylesheet covering tooltips, dark mode, focus rings, and tables.
-* Helpers to flag colour pairs too similar to tell apart and warn when
-  a palette has too many categories.
-* Interactive playground ships as a static shinylive page inside the unified pkgdown + Quarto site — no install or Python server needed.
+* WCAG-tagged palettes with a per-criterion audit, reference rubric, and bundled stylesheet.
+* Interactive playground ships as a static page inside the docs site — no install needed.

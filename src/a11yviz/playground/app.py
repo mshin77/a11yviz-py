@@ -61,7 +61,7 @@ def server(input, output, session):
                                   color="species", shape="species"))
             + geom_point()
             + theme_a11y(level=input.level())
-            + scale_color_a11y(palette="dark2_8")
+            + scale_color_a11y(level=input.level())
             + labs(title="Penguins (theme_a11y + scale_color_a11y)")
         )
         return a11y_alt_text(p, "Penguin body mass vs flipper length by species, AA accessible.")

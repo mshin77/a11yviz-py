@@ -1,7 +1,7 @@
 """WCAG rules and palette specifications, mirrored from a11yviz (R)."""
 
 wcag_rules = {
-    "version": "0.1.2",
+    "version": "0.1.3",
     "wcag_version": "2.1",
     "contrast": {
         "AA":  {"text": 4.5, "nontext": 3.0},
