@@ -5,7 +5,13 @@ from a11yviz.a11y_alt_template import a11y_alt_template
 from a11yviz.a11y_alt_text import a11y_alt_text
 from a11yviz.a11y_announce import a11y_announce
 from a11yviz.a11y_aria_label import a11y_aria_label
-from a11yviz.a11y_audit import a11y_audit
+from a11yviz.a11y_audit import (
+    a11y_audit,
+    a11y_audit_actionable,
+    a11y_audit_chart,
+    a11y_audit_doc,
+    a11y_audit_summary,
+)
 from a11yviz.a11y_check_alt_text import a11y_check_alt_text
 from a11yviz.a11y_check_headings import a11y_check_headings
 from a11yviz.a11y_check_overlap import a11y_check_overlap
@@ -34,7 +40,7 @@ from a11yviz.scale_a11y_continuous import (
 )
 from a11yviz.theme_a11y import theme_a11y
 
-__version__ = "0.1.3"
+__version__ = "0.1.4"
 
 __all__ = [
     "a11y_alpha_presets",
@@ -43,6 +49,10 @@ __all__ = [
     "a11y_announce",
     "a11y_aria_label",
     "a11y_audit",
+    "a11y_audit_actionable",
+    "a11y_audit_chart",
+    "a11y_audit_doc",
+    "a11y_audit_summary",
     "a11y_check_alt_text",
     "a11y_check_headings",
     "a11y_check_overlap",

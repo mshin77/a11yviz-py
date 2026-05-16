@@ -1,4 +1,4 @@
-"""Accessible plotly wrapper (Python sibling of R's a11y_ggplotly).
+"""Accessible plotly wrapper (Python version of R's a11y_ggplotly).
 
 R's `a11y_ggplotly(gg)` accepts a ggplot, converts via `plotly::ggplotly()`,
 then applies a11y layout. Python plotnine has no equivalent native plotly
@@ -18,7 +18,7 @@ def a11y_plotly(p, level: str = "AA", palette: Optional[str] = None,
     """One-call wrapper applying a11y layout and optional alt text.
 
     Pass ``palette=None`` (default) to preserve the figure's existing colors.
-    Python sibling of R's `a11y_ggplotly()`; takes a plotly Figure rather
+    Python version of R's `a11y_ggplotly()`; takes a plotly Figure rather
     than a ggplot (no native plotnine→plotly conversion in Python).
     """
     carried_alt = alt if alt is not None else getattr(p, "_a11y_alt", None)

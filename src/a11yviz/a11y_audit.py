@@ -1,4 +1,4 @@
-"""Audit a plotly Figure against WCAG 2.1 success criteria."""
+"""Audit a plotly Figure or plotnine plot against WCAG 2.1."""
 
 from typing import Optional
 
@@ -6,8 +6,8 @@ from a11yviz._constants import wcag_rules
 from a11yviz._utils import check_level
 
 
-def a11y_audit(p, level: str = "AA") -> list[dict]:
-    """Return per-criterion status rows for a plotly Figure."""
+def a11y_audit_chart(p, level: str = "AA") -> list[dict]:
+    """Return chart-relevant audit rows for a plotly Figure or plotnine plot."""
     level = check_level(level)
     alt_text = getattr(p, "_a11y_alt", None) or _meta_alt(p)
     has_alt = bool(alt_text)
@@ -20,32 +20,56 @@ def a11y_audit(p, level: str = "AA") -> list[dict]:
              "partial" if has_alt else "todo",
              "alt stored on figure; emit via <img alt> or container aria-label"
              if has_alt else "call a11y_alt_text() or a11y_describe()"),
-        _row("1.3.1", "Heading hierarchy",
-             "doc", "run a11y_check_headings() on the host document"),
         _row("1.4.1", "Redundant group encoding",
              color["status"], color["note"]),
         _row("1.4.3", "Text contrast (Min)",
              "applied", "a11y_layout() sets 4.5:1 text on 3:1 non-text"),
         _row("1.4.4", f"Recommended text size ({level} default)",
              text["status"], text["note"]),
-        _row("1.4.4", "Text resizable",
-             "applied", "fonts set in pt; layout scales with container"),
-        _row("1.4.10", "Reflow at 320 CSS px",
-             "manual", "verify host page reflows at 320 px without 2D scroll; "
-                       "a11y_css() ships @media rules"),
         _row("1.4.11", "Non-text contrast",
              "applied", "axis lines, gridlines, error bars styled"),
-        _row("1.4.12", "Body text spacing",
-             "css", "include a11y_css() for line-height and paragraph spacing"),
         _row("1.4.13", "Content on hover or focus",
              hover["status"], hover["note"]),
-        _row("2.4.7", "Visible keyboard focus",
-             "css", "include a11y_css() for keyboard focus rings"),
     ]
     if level == "AAA":
         rows.append(_row("1.4.6", "Enhanced text contrast (AAA)",
                          "applied", "AAA contrast ratios applied"))
     return rows
+
+
+def a11y_audit_doc(level: str = "AA") -> list[dict]:
+    """Return host-document audit rows (identical at AA and AAA)."""
+    check_level(level)
+    return [
+        _row("1.3.1", "Heading hierarchy",
+             "doc", "run a11y_check_headings() on the host document"),
+        _row("1.4.4", "Text resizable",
+             "applied", "fonts set in pt; layout scales with container"),
+        _row("1.4.10", "Reflow at 320 CSS px",
+             "manual", "verify host page reflows at 320 px without 2D scroll; "
+                       "a11y_css() ships @media rules"),
+        _row("1.4.12", "Body text spacing",
+             "css", "include a11y_css() for line-height and paragraph spacing"),
+        _row("2.4.7", "Visible keyboard focus",
+             "css", "include a11y_css() for keyboard focus rings"),
+    ]
+
+
+def a11y_audit(p, level: str = "AA") -> list[dict]:
+    """Return per-criterion status rows (chart + document)."""
+    return a11y_audit_chart(p, level) + a11y_audit_doc(level)
+
+
+def a11y_audit_actionable(audit: list[dict]) -> list[dict]:
+    """Return rows with status 'todo' or 'ok' -- the chart author's decisions."""
+    return [r for r in audit if r["status"] in ("todo", "ok")]
+
+
+def a11y_audit_summary(audit: list[dict]) -> str:
+    """Return a one-line count by status."""
+    todo = sum(1 for r in audit if r["status"] == "todo")
+    ok   = sum(1 for r in audit if r["status"] == "ok")
+    return f"{todo} to do, {ok} ok, {len(audit) - todo - ok} already handled."
 
 
 def _row(criterion: str, check: str, status: str, note: str) -> dict:

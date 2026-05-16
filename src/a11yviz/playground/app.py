@@ -5,7 +5,7 @@ a baseline plotnine chart against the a11y-improved version with a
 per-criterion audit table.
 """
 import pandas as pd
-from plotnine import aes, geom_point, ggplot, labs
+from plotnine import aes, geom_point, ggplot, labs, theme
 from plotnine.data import penguins
 
 _penguins = penguins.dropna()
@@ -13,7 +13,8 @@ from shiny import App, reactive, render, ui
 
 from a11yviz import (
     a11y_alt_text,
-    a11y_audit,
+    a11y_audit_actionable,
+    a11y_audit_chart,
     scale_color_a11y,
     theme_a11y,
 )
@@ -57,14 +58,20 @@ def server(input, output, session):
     @reactive.calc
     def improved_plot():
         p = (
-            ggplot(_penguins, aes("flipper_length_mm", "body_mass_g",
-                                  color="species", shape="species"))
-            + geom_point()
+            ggplot(_penguins, aes("flipper_length_mm", "body_mass_g", color="species"))
+            + geom_point(size=2, alpha=0.75)
             + theme_a11y(level=input.level())
             + scale_color_a11y(level=input.level())
-            + labs(title="Penguins (theme_a11y + scale_color_a11y)")
+            + labs(title="Penguins (theme_a11y + scale_color_a11y)",
+                   x="Flipper length (mm)", y="Body mass (g)", color="Species")
+            + theme(legend_position="top")
         )
         return a11y_alt_text(p, "Penguin body mass vs flipper length by species, AA accessible.")
+
+    def actionable_df(p):
+        return pd.DataFrame(
+            a11y_audit_actionable(a11y_audit_chart(p, level=input.level()))
+        )
 
     @output
     @render.plot
@@ -79,16 +86,12 @@ def server(input, output, session):
     @output
     @render.data_frame
     def audit_before():
-        return render.DataGrid(
-            pd.DataFrame(a11y_audit(base_plot(), level=input.level()))
-        )
+        return render.DataGrid(actionable_df(base_plot()))
 
     @output
     @render.data_frame
     def audit_after():
-        return render.DataGrid(
-            pd.DataFrame(a11y_audit(improved_plot(), level=input.level()))
-        )
+        return render.DataGrid(actionable_df(improved_plot()))
 
 
 app = App(app_ui, server)

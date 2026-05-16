@@ -4,7 +4,7 @@ from a11yviz._constants import wcag_rules
 from a11yviz._utils import check_level, require_pkg
 
 
-def theme_a11y(level: str = "AA", base_family: str = "", dark: bool = False):
+def theme_a11y(level: str = "AA", base_family: str = "DejaVu Sans", dark: bool = False):
     """Plotnine theme with WCAG contrast settings and recommended font sizes."""
     pn = require_pkg("plotnine", "theme_a11y")
     level = check_level(level)

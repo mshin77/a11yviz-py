@@ -67,7 +67,7 @@ def alpha_composite(fg: Color, bg: Color, alpha: float) -> Color:
 
 
 def coalesce(*values):
-    """Return the first non-None value (Python sibling of R's `%||%`)."""
+    """Return the first non-None value (Python version of R's `%||%`)."""
     for v in values:
         if v is not None:
             return v

@@ -15,6 +15,10 @@ from a11yviz import (
     a11y_announce,
     a11y_aria_label,
     a11y_audit,
+    a11y_audit_actionable,
+    a11y_audit_chart,
+    a11y_audit_doc,
+    a11y_audit_summary,
     a11y_check_headings,
     a11y_check_palette,
     a11y_check_readability,
@@ -336,6 +340,33 @@ def test_a11y_audit_criteria_match_wcag():
           "1.4.10", "1.4.11", "1.4.12", "1.4.13", "2.4.7"}
     assert {r["criterion"] for r in a11y_audit(fig, level="AA")}  == aa
     assert {r["criterion"] for r in a11y_audit(fig, level="AAA")} == aa | {"1.4.6"}
+
+
+def test_a11y_audit_chart_returns_chart_rows():
+    fig = go.Figure()
+    assert len(a11y_audit_chart(fig, level="AA"))  == 6
+    assert len(a11y_audit_chart(fig, level="AAA")) == 7
+    assert {r["criterion"] for r in a11y_audit_chart(fig)} == {
+        "1.1.1", "1.4.1", "1.4.3", "1.4.4", "1.4.11", "1.4.13"
+    }
+
+
+def test_a11y_audit_doc_returns_doc_rows():
+    rows = a11y_audit_doc()
+    assert len(rows) == 5
+    assert {r["criterion"] for r in rows} == {
+        "1.3.1", "1.4.4", "1.4.10", "1.4.12", "2.4.7"
+    }
+
+
+def test_a11y_audit_actionable_keeps_todo_and_ok():
+    rows = a11y_audit_actionable(a11y_audit(go.Figure()))
+    assert all(r["status"] in ("todo", "ok") for r in rows)
+
+
+def test_a11y_audit_summary_is_one_sentence():
+    msg = a11y_audit_summary(a11y_audit(go.Figure()))
+    assert "to do" in msg and "ok" in msg and "already handled" in msg
 
 
 def test_a11y_check_alt_text_valid():
