@@ -15,11 +15,31 @@ from a11yviz.a11y_layout import a11y_layout
 
 def a11y_plotly(p, level: str = "AA", palette: Optional[str] = None,
                 alt: Optional[str] = None, strip_title: bool = True):
-    """One-call wrapper applying a11y layout and optional alt text.
+    """Accessible plotly wrapper (Python version of R's a11y_ggplotly)
 
-    Pass ``palette=None`` (default) to preserve the figure's existing colors.
-    Python version of R's `a11y_ggplotly()`; takes a plotly Figure rather
-    than a ggplot (no native plotnine→plotly conversion in Python).
+    Python plotnine has no equivalent native plotly converter, so this
+    function operates on a plotly Figure directly rather than converting
+    from plotnine.
+
+    Parameters
+    ----------
+    p
+        A plotly Figure.
+    level
+        WCAG contrast level: "AA" (default) or "AAA".
+    palette
+        Optional palette name applied as plotly's colorway. None (default)
+        keeps the figure's existing scale.
+    alt
+        Alt-text override. When None, inherited from the figure's
+        attached alt text.
+    strip_title
+        Logical; when True (default) drops title so the host page heading
+        is authoritative.
+
+    Returns
+    -------
+        A plotly Figure with a11y layout and optional alt text applied.
     """
     carried_alt = alt if alt is not None else getattr(p, "_a11y_alt", None)
     if strip_title:

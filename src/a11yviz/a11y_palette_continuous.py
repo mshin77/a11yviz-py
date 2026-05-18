@@ -7,7 +7,17 @@ from a11yviz._utils import require_pkg
 
 
 def a11y_palette_div(name: str = "rdbu") -> dict:
-    """Return low/mid/high anchor colors for a diverging gradient."""
+    """Diverging palette
+
+    Parameters
+    ----------
+    name
+        One of "rdbu" (default), "puor", "brbg", "rdbu_dual", "puor_dual", "brbg_dual", "coolwarm_aaa".
+
+    Returns
+    -------
+        Named list with elements low, mid, high (hex codes for the diverging anchors). To materialize an N-step gradient, pass the list to a color interpolator (e.g., grDevices::colorRampPalette()).
+    """
     spec = _lookup_continuous(name, "diverging")
     src = spec.get("source", "literal")
     if src == "literal":
@@ -22,7 +32,19 @@ def a11y_palette_div(name: str = "rdbu") -> dict:
 
 
 def a11y_palette_seq(name: str = "cividis", n: Optional[int] = None):
-    """Return a viridis-style spec or, with `n`, n sampled hex codes."""
+    """Sequential continuous palette
+
+    Parameters
+    ----------
+    name
+        One of "cividis" (default), "viridis", "plasma".
+    n
+        Optional integer. If supplied, returns n hex codes from the gradient instead of the spec.
+
+    Returns
+    -------
+        Named list with elements option, begin, end, direction -- a viridisLite specification, NOT a color vector. Pass n = to materialize hex codes.
+    """
     spec = _lookup_continuous(name, "sequential")
     src = spec.get("source", "viridislite")
     if src != "viridislite":

@@ -2,7 +2,19 @@
 
 
 def a11y_alt_text(p, text: str):
-    """Attach alt text to a figure for screen readers and audits."""
+    """Add alt text to a plot
+
+    Parameters
+    ----------
+    p
+        A plotly or ggplot object.
+    text
+        Character. Concise description for screen readers.
+
+    Returns
+    -------
+        The object with alt text attached.
+    """
     p._a11y_alt = text
     try:
         p.update_layout(meta=dict(a11y_alt=text))

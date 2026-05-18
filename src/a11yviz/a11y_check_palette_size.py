@@ -2,7 +2,19 @@
 
 
 def a11y_check_palette_size(n: int, max: int = 7) -> dict:
-    """Return a status row for the palette's category count."""
+    """Flag categorical palettes above the recommended maximum
+
+    Parameters
+    ----------
+    n
+        Integer; number of categories.
+    max
+        Integer; recommended maximum. Default 7.
+
+    Returns
+    -------
+        Named list with n, max, status ("ok" / "todo"), note.
+    """
     ok = n <= max
     note = (f"{n} categories within recommended max {max}" if ok
             else f"{n} categories exceeds recommended max {max}; "

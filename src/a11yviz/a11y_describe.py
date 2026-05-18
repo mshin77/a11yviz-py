@@ -7,7 +7,21 @@ from a11yviz.a11y_alt_text import a11y_alt_text
 
 
 def a11y_describe(p, backend: Callable[[dict], str], attach: bool = True):
-    """Call ``backend(context)`` to draft alt text and optionally attach it."""
+    """Generate alt text via a user-supplied LLM backend
+
+    Parameters
+    ----------
+    p
+        A ggplot or plotly object.
+    backend
+        A function function(context) -> character(1). Receives a list with fields chart_type, title, x, y, color, n_observations. Returns a single string.
+    attach
+        If TRUE (default), attach via a11y_alt_text(). Otherwise return the string.
+
+    Returns
+    -------
+        The plot with alt text attached, or the string itself.
+    """
     context = _plot_context(p)
     text = backend(context)
     return a11y_alt_text(p, text) if attach else text

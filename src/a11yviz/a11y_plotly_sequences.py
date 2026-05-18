@@ -7,7 +7,19 @@ from a11yviz._utils import check_level, contrast_ratio
 
 
 def a11y_plotly_sequences(bg: str = "#ffffff", level: str = "AA") -> list[dict]:
-    """Return contrast statistics for plotly's built-in discrete sequences."""
+    """Audit plotly's built-in discrete color sequences
+
+    Parameters
+    ----------
+    bg
+        Reference background hex (default "#ffffff").
+    level
+        "AA" (4.5:1) or "AAA" (7:1).
+
+    Returns
+    -------
+        Data frame with one row per sequence: name, n, min_ratio, median_ratio, n_pass, pct_pass.
+    """
     level = check_level(level)
     threshold = 4.5 if level == "AA" else 7.0
 

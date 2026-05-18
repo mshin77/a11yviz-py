@@ -1,3 +1,8 @@
+# a11yviz 0.1.5
+
+* Playground opens on a short chart file users can edit directly.
+* Audit wording now reads the same as the R package.
+
 # a11yviz 0.1.4
 
 * Split the audit into chart and document parts for shorter tables.

@@ -5,7 +5,21 @@ from a11yviz._utils import check_level, require_pkg
 
 
 def theme_a11y(level: str = "AA", base_family: str = "DejaVu Sans", dark: bool = False):
-    """Plotnine theme with WCAG contrast settings and recommended font sizes."""
+    """Accessible ggplot2 theme
+
+    Parameters
+    ----------
+    level
+        WCAG contrast level: "AA" (default) or "AAA". The level controls contrast targets and the package's default font sizes; only the contrast targets are WCAG-defined.
+    base_family
+        Font family. Defaults to system sans.
+    dark
+        Logical; if TRUE, use a dark-mode palette appropriate for darkly-style themes.
+
+    Returns
+    -------
+        A theme object.
+    """
     pn = require_pkg("plotnine", "theme_a11y")
     level = check_level(level)
     fz = wcag_rules["font_size"][level]

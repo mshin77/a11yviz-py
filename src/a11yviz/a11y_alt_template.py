@@ -6,7 +6,17 @@ from a11yviz._utils import coalesce
 
 
 def a11y_alt_template(p) -> str:
-    """Return a sentence scaffold pre-filled with chart type and axis labels."""
+    """Generate a deterministic alt-text template for a plot
+
+    Parameters
+    ----------
+    p
+        A ggplot or plotly object.
+
+    Returns
+    -------
+        Character scalar.
+    """
     return _alt_template_plotly(p)
 
 

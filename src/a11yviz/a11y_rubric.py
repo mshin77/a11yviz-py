@@ -16,19 +16,19 @@ _rows = [
     {"criterion": "1.4.1",  "name": "Use of Color",              "level": "A",
      "threshold_aa":  "redundant encoding (shape/linetype)",
      "threshold_aaa": "redundant encoding (shape/linetype)",
-     "a11yviz_function": "redundant encoding via marker symbols / line dash"},
+     "a11yviz_function": "scale_color_a11y() + aes(shape = ...)"},
     {"criterion": "1.4.3",  "name": "Contrast (Minimum)",        "level": "AA",
      "threshold_aa":  "text 4.5:1; large text 3:1",
      "threshold_aaa": "--",
-     "a11yviz_function": "a11y_layout(), a11y_check_palette()"},
+     "a11yviz_function": "theme_a11y(), a11y_layout(), a11y_check_palette()"},
     {"criterion": "1.4.4",  "name": "Resize Text",               "level": "AA",
      "threshold_aa":  "resizable to 200%",
      "threshold_aaa": "resizable to 200%",
-     "a11yviz_function": "a11y_layout() (pt fonts; layout scales)"},
-    {"criterion": "1.4.6",  "name": "Contrast (Enhanced)",       "level": "AAA",
+     "a11yviz_function": "theme_a11y() (pt fonts; layout scales)"},
+    {"criterion": "1.4.6",  "name": "Contrast (AAA)",            "level": "AAA",
      "threshold_aa":  "--",
      "threshold_aaa": "text 7:1; large text 4.5:1",
-     "a11yviz_function": "a11y_layout(level='AAA'), a11y_check_palette(level='AAA')"},
+     "a11yviz_function": "theme_a11y(level='AAA'), a11y_check_palette(level='AAA')"},
     {"criterion": "1.4.10", "name": "Reflow",                    "level": "AA",
      "threshold_aa":  "no 2D scroll at 320 CSS px (vertical content)",
      "threshold_aaa": "no 2D scroll at 320 CSS px (vertical content)",
@@ -69,7 +69,17 @@ _rows = [
 
 
 def a11y_rubric(level: Optional[str] = None) -> list[dict]:
-    """Return the chart-relevant WCAG 2.1 rubric, optionally filtered by level."""
+    """WCAG 2.1 rubric for the success criteria a11yviz addresses
+
+    Parameters
+    ----------
+    level
+        Optional filter: "AA" or "AAA". NULL (default) returns all rows.
+
+    Returns
+    -------
+        Data frame with columns criterion, name, level, threshold_aa, threshold_aaa, a11yviz_function. Pass any criterion value to a11y_wcag_url() for the spec link.
+    """
     if level is None:
         return [dict(r) for r in _rows]
     level = check_level(level)

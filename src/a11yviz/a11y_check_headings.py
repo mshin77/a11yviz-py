@@ -10,7 +10,19 @@ _tag_re = re.compile(r"<[^>]+>")
 
 
 def a11y_check_headings(path: os.PathLike, min_chars: int = 3) -> list[dict]:
-    """Return heading hierarchy and label issues for a Markdown or HTML file."""
+    """Check Markdown / Quarto / HTML heading hierarchy and labels
+
+    Parameters
+    ----------
+    path
+        Path to a .md, .qmd, .Rmd, or .html file.
+    min_chars
+        Minimum heading text length (after trimming) considered descriptive. Default 3.
+
+    Returns
+    -------
+        Data frame with one row per issue, columns line, level, text, issue. Empty data frame if no issues.
+    """
     path = os.fspath(path)
     if not os.path.isfile(path):
         raise FileNotFoundError(f"File not found: {path}")

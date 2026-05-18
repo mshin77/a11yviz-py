@@ -13,7 +13,17 @@ _md_punct_re = re.compile(r"[#*_>~\[\]()]")
 
 
 def a11y_check_readability(text: Union[str, os.PathLike]) -> dict:
-    """Return sentences, words, syllables, FK grade, and FK reading ease."""
+    """Estimate reading level of prose
+
+    Parameters
+    ----------
+    text
+        Character vector, single string, or path to a .md, .qmd, .Rmd, or .txt file.
+
+    Returns
+    -------
+        Data frame with one row and columns sentences, words, syllables, flesch_kincaid_grade, flesch_reading_ease.
+    """
     text = _read_input(text)
     text = _strip_markdown(text)
 

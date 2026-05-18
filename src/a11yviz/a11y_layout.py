@@ -8,7 +8,21 @@ from a11yviz.a11y_palette import a11y_palette
 
 
 def a11y_layout(p, level: str = "AA", palette: Optional[str] = "dark2_8"):
-    """Apply WCAG layout styling to a plotly Figure."""
+    """Apply accessible layout to a plotly figure
+
+    Parameters
+    ----------
+    p
+        A plotly object (from plotly::plot_ly or plotly::ggplotly).
+    level
+        "AA" or "AAA".
+    palette
+        Discrete palette name applied as plotly's colorway. See a11y_palette_list(). Pass NULL to leave plotly's default colors unchanged.
+
+    Returns
+    -------
+        Modified plotly object.
+    """
     level = check_level(level)
     fz = wcag_rules["font_size"][level]
     tt = wcag_rules["tooltip"]

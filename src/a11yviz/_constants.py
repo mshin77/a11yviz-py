@@ -1,7 +1,7 @@
 """WCAG rules and palette specifications, mirrored from a11yviz (R)."""
 
 wcag_rules = {
-    "version": "0.1.4",
+    "version": "0.1.5",
     "wcag_version": "2.1",
     "contrast": {
         "AA":  {"text": 4.5, "nontext": 3.0},
@@ -25,11 +25,33 @@ wcag_rules = {
         "fill":          0.9,
         "ci_ribbon":     0.10,
         "ci_band":       0.15,
+        "draw_order":    "arrange(desc(size_var)) before geom_point -- larger drawn first, smaller on top",
+    },
+    "sc_mapping": {
+        "theme_a11y": [
+            "1.4.3 Contrast (Minimum)",
+            "1.4.11 Non-text Contrast",
+            "1.4.12 Text Spacing",
+        ],
+        "scale_a11y_color": [
+            "1.4.1 Use of Color",
+        ],
+        "a11y_alt_text": [
+            "1.1.1 Non-text Content",
+        ],
+        "a11y_layout": [
+            "1.4.3 Contrast (Minimum)",
+            "1.4.4 Resize text",
+            "1.4.11 Non-text Contrast",
+        ],
     },
 }
 
 palettes = {
     "dark2_8": {
+        "source":   "rcolorbrewer",
+        "palette":  "Dark2",
+        "n_colors": 8,
         "colors": ["#1B9E77", "#D95F02", "#7570B3", "#E7298A",
                    "#66A61E", "#E6AB02", "#A6761D", "#666666"],
         "safe_on": "labeled",
@@ -37,6 +59,9 @@ palettes = {
         "notes": "RColorBrewer Dark2. Two of eight fail AA on white -- pair with cell labels.",
     },
     "set2_8": {
+        "source":   "rcolorbrewer",
+        "palette":  "Set2",
+        "n_colors": 8,
         "colors": ["#66C2A5", "#FC8D62", "#8DA0CB", "#E78AC3",
                    "#A6D854", "#FFD92F", "#E5C494", "#B3B3B3"],
         "safe_on": "labeled",
@@ -44,18 +69,22 @@ palettes = {
         "notes": "RColorBrewer Set2. Pastel categorical for labeled fills.",
     },
     "paired_12": {
+        "source":   "rcolorbrewer",
+        "palette":  "Paired",
+        "n_colors": 12,
         "colors": ["#A6CEE3", "#1F78B4", "#B2DF8A", "#33A02C",
                    "#FB9A99", "#E31A1C", "#FDBF6F", "#FF7F00",
                    "#CAB2D6", "#6A3D9A", "#FFFF99", "#B15928"],
         "safe_on": "labeled",
         "purpose": "fill",
-        "notes": "RColorBrewer Paired (light/dark pairs).",
+        "notes": "RColorBrewer Paired (light/dark pairs). Twelve categories.",
     },
     "aaa_5": {
+        "source": "literal",
         "colors": ["#154E8A", "#7C2C5E", "#5C5108", "#8A3A1F", "#2D5C53"],
         "safe_on": "white",
         "purpose": "both",
-        "notes": "Custom AAA-on-white categorical. All five > 7.5:1 on white. Pair with shape or linetype for redundant encoding.",
+        "notes": "Custom AAA-on-white categorical (deep blue / purple / olive / terracotta / teal). All five > 7.5:1 on white. Distinguishability under color-vision differences not formally validated -- pair with shape or linetype for redundant encoding (WCAG 1.4.1).",
     },
 }
 
@@ -68,28 +97,38 @@ _brbg_11 = ["#543005", "#8C510A", "#BF812D", "#DFC27D", "#F6E8C3",
 
 diverging = {
     "rdbu":      {"source": "rcolorbrewer", "colors": _rdbu_11, "positions": [10, 6, 2],
-                  "safe_on": "white",  "notes": "RColorBrewer RdBu. Endpoints AA on white."},
+                  "safe_on": "white", "purpose": "gradient",
+                  "notes": "RColorBrewer RdBu. Endpoints AA on white."},
     "puor":      {"source": "rcolorbrewer", "colors": _puor_11, "positions": [10, 6, 2],
-                  "safe_on": "white",  "notes": "RColorBrewer PuOr. Endpoints AA on white."},
+                  "safe_on": "white", "purpose": "gradient",
+                  "notes": "RColorBrewer PuOr. Endpoints AA on white. Use when red has unwanted connotation."},
     "brbg":      {"source": "rcolorbrewer", "colors": _brbg_11, "positions": [10, 6, 2],
-                  "safe_on": "white",  "notes": "RColorBrewer BrBG. Endpoints AA on white."},
+                  "safe_on": "white", "purpose": "gradient",
+                  "notes": "RColorBrewer BrBG. Brown-blue-green; endpoints AA on white."},
     "rdbu_dual": {"source": "rcolorbrewer", "colors": _rdbu_11, "positions": [9, 6, 3],
-                  "safe_on": "both",   "notes": "RColorBrewer RdBu mid-saturation. Endpoints clear non-text 3:1 on white and dark."},
+                  "safe_on": "both", "purpose": "gradient",
+                  "notes": "RColorBrewer RdBu mid-saturation. Endpoints clear non-text 3:1 on white and #1a1a1a dark."},
     "puor_dual": {"source": "rcolorbrewer", "colors": _puor_11, "positions": [9, 6, 3],
-                  "safe_on": "both",   "notes": "RColorBrewer PuOr mid-saturation. Endpoints clear non-text 3:1 on white and dark."},
+                  "safe_on": "both", "purpose": "gradient",
+                  "notes": "RColorBrewer PuOr mid-saturation. Endpoints clear non-text 3:1 on white and #1a1a1a dark."},
     "brbg_dual": {"source": "rcolorbrewer", "colors": _brbg_11, "positions": [9, 6, 3],
-                  "safe_on": "both",   "notes": "RColorBrewer BrBG mid-saturation. Endpoints clear non-text 3:1 on white and dark."},
+                  "safe_on": "both", "purpose": "gradient",
+                  "notes": "RColorBrewer BrBG mid-saturation. Endpoints clear non-text 3:1 on white and #1a1a1a dark."},
     "coolwarm_aaa": {"source": "literal", "low": "#3b4cc0", "mid": "#ffffff", "high": "#b40426",
-                     "safe_on": "white", "notes": "Custom diverging. Both endpoints AAA on white."},
+                     "safe_on": "white", "purpose": "gradient",
+                     "notes": "Custom diverging. Both endpoints AAA on white (>7:1). Fails on dark; pick *_dual for both backgrounds."},
 }
 
 sequential = {
     "cividis": {"source": "viridislite", "option": "cividis",
-                "safe_on": "both", "notes": "Cividis. Readable in greyscale; spans full lightness range."},
+                "safe_on": "both", "purpose": "gradient",
+                "notes": "viridisLite cividis. Readable in greyscale; spans the full lightness range."},
     "viridis": {"source": "viridislite", "option": "viridis",
-                "safe_on": "both", "notes": "Viridis (Smith & van der Walt). Perceptually uniform default."},
+                "safe_on": "both", "purpose": "gradient",
+                "notes": "viridisLite viridis (Smith & van der Walt). Perceptually uniform default."},
     "plasma":  {"source": "viridislite", "option": "plasma",
-                "safe_on": "both", "notes": "Plasma. Higher dynamic range; emphasizes extremes."},
+                "safe_on": "both", "purpose": "gradient",
+                "notes": "viridisLite plasma. Higher dynamic range; emphasizes extremes."},
 }
 
 plotly_sequences = {
@@ -115,7 +154,7 @@ wcag_slug = {
     "1.4.1":  "use-of-color",
     "1.4.3":  "contrast-minimum",
     "1.4.4":  "resize-text",
-    "1.4.6":  "contrast-enhanced",
+    "1.4.6":  "contrast-enhanced",  # W3C-set fragment id; do not rename
     "1.4.10": "reflow",
     "1.4.11": "non-text-contrast",
     "1.4.12": "text-spacing",

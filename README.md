@@ -10,7 +10,7 @@ Makes charts and documents accessible across
 in Python, aligned with the [Web Content Accessibility Guidelines
 (WCAG 2.1)](https://www.w3.org/TR/WCAG21/). Includes WCAG-tagged
 palettes, alt-text scaffolds, audits, a document rubric, heading and
-reading-level checks, `shiny` ARIA helpers, and a drop-in stylesheet.
+reading-level checks, `shiny` ARIA helpers, and a stylesheet.
 
 R version: [a11yviz](https://github.com/mshin77/a11yviz).
 
@@ -38,7 +38,7 @@ a11yviz.a11y_alt_text(p, "Scatter of penguin body mass vs flipper length by spec
 ## Citation
 
 Shin, M. (2026). *a11yviz: Accessibility toolkit for ggplot2, plotly, and
-Quarto* (R package version 0.1.4). <https://mshin77.github.io/a11yviz>
+Quarto* (R package version 0.1.5). <https://mshin77.github.io/a11yviz>
 
 Shin, M. (2026). *a11yviz: Accessibility toolkit for plotnine, plotly,
-and Quarto* (Python package version 0.1.4). <https://github.com/mshin77/a11yviz-py>
+and Quarto* (Python package version 0.1.5). <https://github.com/mshin77/a11yviz-py>

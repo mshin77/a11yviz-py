@@ -8,7 +8,19 @@ from a11yviz._utils import contrast_ratio
 
 def a11y_check_separability(colors: Sequence[str],
                             min_ratio: float = 3.0) -> list[dict]:
-    """Return per-pair contrast rows; pairs below `min_ratio` get status 'todo'."""
+    """Flag color pairs below the WCAG 2.1 Success Criterion 1.4.11 contrast threshold
+
+    Parameters
+    ----------
+    colors
+        Character vector of hex codes.
+    min_ratio
+        Numeric threshold; default 3.0 per WCAG Success Criterion 1.4.11.
+
+    Returns
+    -------
+        Data frame with columns from, to, ratio, status.
+    """
     if len(colors) < 2:
         return []
     rows = []

@@ -10,7 +10,23 @@ from a11yviz.theme_a11y import theme_a11y
 
 def make_a11y(p, level: str = "AA", palette: str = "dark2_8",
               alt: Optional[str] = None):
-    """Apply theme + palettes (plotnine) or layout + palette (plotly) in one call."""
+    """One-shot accessibility wrapper
+
+    Parameters
+    ----------
+    p
+        A ggplot or plotly object.
+    level
+        "AA" or "AAA".
+    palette
+        Categorical palette name passed to a11y_palette().
+    alt
+        Optional alt-text string.
+
+    Returns
+    -------
+        The transformed object.
+    """
     if _is_plotnine(p):
         p = p + theme_a11y(level=level)
         p = p + scale_color_a11y(palette=palette)

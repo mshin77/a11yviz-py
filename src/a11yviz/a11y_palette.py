@@ -8,7 +8,21 @@ from a11yviz._constants import diverging, palettes, sequential
 
 def a11y_palette(name: str = "dark2_8", n: Optional[int] = None,
                  bg: Optional[str] = None) -> list[str]:
-    """Return hex codes for a categorical palette."""
+    """Discrete color palette (categorical)
+
+    Parameters
+    ----------
+    name
+        Discrete palette name. Built-in: "dark2_8" (default, RColorBrewer Dark2), "set2_8" (RColorBrewer Set2), "paired_12" (RColorBrewer Paired), "aaa_5" (custom AAA-on-white set).
+    n
+        Optional number of colors. Defaults to the palette's full size (truncates from the start when smaller).
+    bg
+        Plot background context. One of NULL (default -- no check), "white", or "dark". When set, the function warns if the palette's safe_on tag does not match.
+
+    Returns
+    -------
+        Character vector of hex codes (e.g., "#1B9E77"). For sequential gradients, see a11y_palette_seq().
+    """
     spec = _palette_spec(name)
     colors = spec["colors"]
     if n is not None:
@@ -19,13 +33,34 @@ def a11y_palette(name: str = "dark2_8", n: Optional[int] = None,
 
 
 def a11y_palette_info(name: str = "dark2_8") -> dict:
-    """Return the full spec for a palette."""
+    """Discrete palette metadata
+
+    Parameters
+    ----------
+    name
+        Discrete palette name. Built-in: "dark2_8" (default, RColorBrewer Dark2), "set2_8" (RColorBrewer Set2), "paired_12" (RColorBrewer Paired), "aaa_5" (custom AAA-on-white set).
+
+    Returns
+    -------
+        Named list with name, colors, safe_on, purpose, notes, plus the source spec fields.
+    """
     spec = _palette_spec(name)
-    return {"name": name, **spec}
+    rest = {k: v for k, v in spec.items() if k != "colors"}
+    return {"name": name, "colors": spec["colors"], **rest}
 
 
 def a11y_palette_list(type: Optional[str] = None) -> list[dict]:
-    """List discrete, diverging, and sequential palettes; filter by `type` if set."""
+    """List available palettes
+
+    Parameters
+    ----------
+    type
+        Optional filter: "discrete", "diverging", or "sequential". NULL (default) returns all.
+
+    Returns
+    -------
+        Data frame with columns name, type, source, n, safe_on, purpose. n is NA for continuous palettes. For the notes field of a single palette, call a11y_palette_info().
+    """
     sources = {"discrete": palettes, "diverging": diverging, "sequential": sequential}
     if type is not None and type not in sources:
         raise ValueError(f"type must be one of {sorted(sources)}")
@@ -46,6 +81,7 @@ def _palette_row(name: str, type_: str, spec: dict) -> dict:
     return {
         "name":    name,
         "type":    type_,
+        "source":  spec.get("source", "literal"),
         "n":       len(spec["colors"]) if type_ == "discrete" else None,
         "safe_on": spec.get("safe_on"),
         "purpose": spec.get("purpose"),

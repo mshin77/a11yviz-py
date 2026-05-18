@@ -8,7 +8,21 @@ from a11yviz.a11y_palette import a11y_palette
 
 def a11y_show_palette(name: str = "dark2_8", bg: str = "#ffffff",
                       level: str = "AA"):
-    """Render a swatch grid with contrast ratios for each palette color."""
+    """Visualize a palette with WCAG contrast overlay
+
+    Parameters
+    ----------
+    name
+        Discrete palette name. See a11y_palette_list().
+    bg
+        Reference background hex (default "#ffffff").
+    level
+        "AA" or "AAA".
+
+    Returns
+    -------
+        A ggplot object.
+    """
     pn = require_pkg("plotnine", "a11y_show_palette")
     pd = require_pkg("pandas", "a11y_show_palette")
     level = check_level(level)

@@ -7,6 +7,21 @@ from a11yviz._utils import require_pkg
 
 def run_app(host: str = "127.0.0.1", port: int = 8000,
             launch_browser: bool = True) -> None:
+    """Launch the local accessibility playground
+
+    Parameters
+    ----------
+    host
+        Network host (default "127.0.0.1").
+    port
+        Port (default 8000).
+    launch_browser
+        Open the default browser (default True).
+
+    Returns
+    -------
+        None.
+    """
     shiny = require_pkg("shiny", "run_app")
     require_pkg("plotnine", "run_app")
     app_path = Path(__file__).parent / "playground" / "app.py"

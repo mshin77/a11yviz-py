@@ -8,7 +8,23 @@ def a11y_check_alt_text(alt_text: Optional[str],
                         element_type: str = "image",
                         decorative: bool = False,
                         min_length: int = 10) -> bool:
-    """Return True if `alt_text` is valid for `element_type`; warn otherwise."""
+    """Check alt-text presence and length (WCAG 1.1.1)
+
+    Parameters
+    ----------
+    alt_text
+        Character or NULL. Candidate alt text.
+    element_type
+        Character. Element type for the warning, e.g. "plot".
+    decorative
+        Logical. If TRUE, empty alt text is allowed.
+    min_length
+        Integer. Minimum length for informative alt text (default 10).
+
+    Returns
+    -------
+        TRUE if valid; FALSE with a warning otherwise.
+    """
     if decorative:
         return True
     if alt_text is None or alt_text == "":

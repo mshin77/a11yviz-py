@@ -40,7 +40,7 @@ from a11yviz.scale_a11y_continuous import (
 )
 from a11yviz.theme_a11y import theme_a11y
 
-__version__ = "0.1.4"
+__version__ = "0.1.5"
 
 __all__ = [
     "a11y_alpha_presets",

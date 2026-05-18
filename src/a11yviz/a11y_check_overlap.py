@@ -2,7 +2,19 @@
 
 
 def a11y_check_overlap(p, bins: int = 100) -> dict:
-    """Bin scatter coordinates and report the fraction sharing a grid cell."""
+    """Scatter overlap check (WCAG Success Criterion 1.3.1)
+
+    Parameters
+    ----------
+    p
+        A ggplot object with at least one geom_point layer.
+    bins
+        Grid resolution per axis (default 100).
+
+    Returns
+    -------
+        List with total, obscured, fraction, recommendation.
+    """
     xs, ys = _collect_scatter_points(p)
     total = len(xs)
     if total == 0:
@@ -23,11 +35,11 @@ def a11y_check_overlap(p, bins: int = 100) -> dict:
     obscured = sum(c for c in counts.values() if c > 1)
     fraction = round(obscured / total, 3)
     if obscured == 0:
-        rec = "no alpha needed (no occlusion; WCAG 1.3.1 satisfied)"
+        rec = "no alpha needed (no occlusion; Success Criterion 1.3.1 satisfied)"
     else:
-        rec = (f"{round(fraction * 100)}% of points share a grid cell; if alpha is "
-               "added, verify composited contrast >= 3:1 via "
-               "a11y_check_palette(alpha=...) (WCAG 1.4.11)")
+        rec = (f"{round(fraction * 100)}% of points share a grid cell; if alpha is added, "
+               "verify composited contrast >= 3:1 via "
+               "a11y_check_palette(alpha = ...) (Success Criterion 1.4.11)")
     return {"total": total, "obscured": obscured,
             "fraction": fraction, "recommendation": rec}
 

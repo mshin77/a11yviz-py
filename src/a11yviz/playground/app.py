@@ -1,7 +1,7 @@
 """Local accessibility playground (Shiny for Python).
 
 Mirrors inst/playground/app.R: a WCAG level toggle plus two tabs comparing
-a baseline plotnine chart against the a11y-improved version with a
+a baseline plotnine chart against the accessible version with a
 per-criterion audit table.
 """
 import pandas as pd
@@ -37,7 +37,7 @@ app_ui = ui.page_sidebar(
             ui.output_data_frame("audit_before"),
         ),
         ui.nav_panel(
-            "Improved",
+            "Accessible",
             ui.output_plot("plot_after", height="320px"),
             ui.tags.h3("Audit", class_="h6 mt-3"),
             ui.output_data_frame("audit_after"),
@@ -56,7 +56,7 @@ def server(input, output, session):
         )
 
     @reactive.calc
-    def improved_plot():
+    def a11y_plot():
         p = (
             ggplot(_penguins, aes("flipper_length_mm", "body_mass_g", color="species"))
             + geom_point(size=2, alpha=0.75)
@@ -81,7 +81,7 @@ def server(input, output, session):
     @output
     @render.plot
     def plot_after():
-        return improved_plot().draw()
+        return a11y_plot().draw()
 
     @output
     @render.data_frame
@@ -91,7 +91,7 @@ def server(input, output, session):
     @output
     @render.data_frame
     def audit_after():
-        return render.DataGrid(actionable_df(improved_plot()))
+        return render.DataGrid(actionable_df(a11y_plot()))
 
 
 app = App(app_ui, server)
