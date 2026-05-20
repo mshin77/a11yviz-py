@@ -23,6 +23,7 @@ from a11yviz.a11y_check_tabindex import a11y_check_tabindex
 from a11yviz.a11y_css import a11y_css, a11y_css_contents
 from a11yviz.a11y_describe import a11y_describe
 from a11yviz.a11y_layout import a11y_layout
+from a11yviz.a11y_minimum import a11y_minimum
 from a11yviz.a11y_palette import a11y_palette, a11y_palette_info, a11y_palette_list
 from a11yviz.a11y_palette_continuous import a11y_palette_div, a11y_palette_seq
 from a11yviz.a11y_plotly import a11y_plotly
@@ -40,7 +41,7 @@ from a11yviz.scale_a11y_continuous import (
 )
 from a11yviz.theme_a11y import theme_a11y
 
-__version__ = "0.1.5"
+__version__ = "0.1.6"
 
 __all__ = [
     "a11y_alpha_presets",
@@ -65,6 +66,7 @@ __all__ = [
     "a11y_css_contents",
     "a11y_describe",
     "a11y_layout",
+    "a11y_minimum",
     "a11y_palette",
     "a11y_palette_info",
     "a11y_palette_list",

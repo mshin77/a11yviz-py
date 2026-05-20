@@ -183,15 +183,27 @@ def _check_color_only(p) -> dict:
         return {"status": "manual",
                 "note":   "verify category encoding is not color-only"}
     mapping = getattr(p, "mapping", None) or {}
-    has_color     = any(k in mapping for k in ("color", "colour", "fill"))
-    has_redundant = any(k in mapping for k in ("shape", "linetype"))
+    has_color = any(k in mapping for k in ("color", "colour", "fill"))
     if not has_color:
         return {"status": "n/a", "note": "no color/fill aesthetic"}
-    if has_redundant:
+    has_shape = any(k in mapping for k in ("shape", "linetype"))
+    has_label = _has_label_layer(p)
+    if has_shape:
         return {"status": "ok",
                 "note":   "shape or linetype redundantly encodes group"}
+    if has_label:
+        return {"status": "ok",
+                "note":   "direct text labels redundantly identify groups"}
     return {"status": "todo",
             "note":   "add direct group labels (geom_text at cluster centroids), facet by group, or aes(shape=) / aes(linetype=) to redundantly encode the group"}
+
+
+def _has_label_layer(p) -> bool:
+    return any(
+        type(layer.geom).__name__ in ("geom_text", "geom_label")
+        and "label" in (layer.mapping or {})
+        for layer in getattr(p, "layers", []) or []
+    )
 
 
 def _is_plotnine(p) -> bool:

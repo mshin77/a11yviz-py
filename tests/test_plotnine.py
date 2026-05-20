@@ -139,6 +139,17 @@ def test_audit_plotnine_redundant_shape_is_ok():
     assert color_row["status"] == "ok"
 
 
+def test_audit_plotnine_redundant_label_is_ok():
+    df = pd.DataFrame({"x": [1, 2], "y": [3, 4], "g": ["a", "b"]})
+    p = (pn.ggplot(df, pn.aes("x", "y", color="g"))
+         + pn.geom_point()
+         + pn.geom_text(pn.aes(label="g")))
+    rows = a11y_audit(p)
+    color_row = next(r for r in rows if r["criterion"] == "1.4.1")
+    assert color_row["status"] == "ok"
+    assert "direct text labels" in color_row["note"]
+
+
 def test_audit_plotnine_no_color_is_na():
     df = pd.DataFrame({"x": [1, 2], "y": [3, 4]})
     p = pn.ggplot(df, pn.aes("x", "y")) + pn.geom_point()
