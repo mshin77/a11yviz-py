@@ -8,7 +8,7 @@ authors:
     email: "shin.mikyung@gmail.com"
     orcid: "https://orcid.org/0000-0001-7907-9193"
     affiliation: "Illinois State University"
-version: "0.1.6"
+version: "0.1.7"
 license: "MIT"
 repository-code: "https://github.com/mshin77/a11yviz-py"
 url: "https://mshin77.github.io/a11yviz"

@@ -1,15 +1,15 @@
 """WCAG rules and palette specifications, mirrored from a11yviz (R)."""
 
 wcag_rules = {
-    "version": "0.1.6",
+    "version": "0.1.7",
     "wcag_version": "2.1",
     "contrast": {
         "AA":  {"text": 4.5, "nontext": 3.0},
         "AAA": {"text": 7.0, "nontext": 3.0},
     },
     "font_size": {
-        "AA":  {"body": 12, "title": 12, "legend": 12},
-        "AAA": {"body": 14, "title": 14, "legend": 14},
+        "AA":  {"body": 12, "title": 12, "legend": 12, "axis_text": 10},
+        "AAA": {"body": 14, "title": 14, "legend": 14, "axis_text": 12},
     },
     "tooltip": {
         "font":   "Roboto, sans-serif",

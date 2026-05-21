@@ -46,6 +46,22 @@ def test_theme_a11y_rejects_invalid_level():
         theme_a11y(level="A")
 
 
+def _size(theme, key):
+    el = theme.themeables[key].properties
+    return el.get("size") if isinstance(el, dict) else getattr(el, "size", None)
+
+
+def test_theme_a11y_tiers_axis_text_below_body():
+    aa  = theme_a11y(level="AA")
+    aaa = theme_a11y(level="AAA")
+    assert _size(aa,  "plot_title") == 12
+    assert _size(aa,  "axis_title") == 12
+    assert _size(aa,  "axis_text")  == 10
+    assert _size(aaa, "plot_title") == 14
+    assert _size(aaa, "axis_title") == 14
+    assert _size(aaa, "axis_text")  == 12
+
+
 # discrete scales ----------------------------------------------------------
 
 def test_scale_color_a11y_uses_palette():

@@ -1,3 +1,8 @@
+# a11yviz 0.1.7
+
+* Theme keeps title, axis title, and legend at the body floor while axis tick text sits two points smaller.
+* Plotly layout drops tick font down to match.
+
 # a11yviz 0.1.6
 
 * A lighter helper adds alt text and lifts small fonts, leaving palette and theme alone.

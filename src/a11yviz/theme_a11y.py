@@ -5,7 +5,7 @@ from a11yviz._utils import check_level, require_pkg
 
 
 def theme_a11y(level: str = "AA", base_family: str = "DejaVu Sans", dark: bool = False):
-    """Accessible ggplot2 theme
+    """Accessible plotnine theme. Title, axis title, and legend sit at the body floor (12 pt AA / 14 pt AAA); axis tick text drops 2 pt below.
 
     Parameters
     ----------
@@ -23,6 +23,7 @@ def theme_a11y(level: str = "AA", base_family: str = "DejaVu Sans", dark: bool =
     pn = require_pkg("plotnine", "theme_a11y")
     level = check_level(level)
     fz = wcag_rules["font_size"][level]
+    axis_sz = fz.get("axis_text", fz["body"])
     fg = "#dee2e6" if dark else "#222222"
     bg = "#2d2d2d" if dark else "#ffffff"
     grid = "#495057" if dark else "#e5e5e5"
@@ -33,7 +34,7 @@ def theme_a11y(level: str = "AA", base_family: str = "DejaVu Sans", dark: bool =
         plot_title=pn.element_text(size=fz["body"], weight="bold", color=fg),
         plot_subtitle=pn.element_text(size=fz["body"], color=fg),
         axis_title=pn.element_text(size=fz["body"], color=fg),
-        axis_text=pn.element_text(size=fz["body"], color=fg),
+        axis_text=pn.element_text(size=axis_sz, color=fg),
         legend_title=pn.element_text(size=fz["body"], color=fg),
         legend_text=pn.element_text(size=fz["body"], color=fg),
         strip_text=pn.element_text(size=fz["body"], color=fg),

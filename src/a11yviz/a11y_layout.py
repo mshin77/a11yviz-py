@@ -26,11 +26,13 @@ def a11y_layout(p, level: str = "AA", palette: Optional[str] = "dark2_8"):
     level = check_level(level)
     fz = wcag_rules["font_size"][level]
     tt = wcag_rules["tooltip"]
+    axis_sz = fz.get("axis_text", fz["body"])
 
     body  = dict(family=tt["font"], size=fz["body"],  color="#222")
     title = dict(family=tt["font"], size=fz["title"], color="#222")
+    tick  = dict(family=tt["font"], size=axis_sz,     color="#222")
     hover = dict(family=tt["font"], size=tt["size"],  color=tt["text"])
-    axis  = dict(tickfont=body, title=dict(font=title),
+    axis  = dict(tickfont=tick, title=dict(font=title),
                  gridcolor="#e5e5e5", zerolinecolor="#c0c0c0")
 
     args: dict[str, Any] = dict(

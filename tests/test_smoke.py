@@ -597,6 +597,8 @@ def test_wcag_rules_top_level_keys():
 def test_wcag_font_sizes_per_level():
     assert wcag_rules["font_size"]["AA"]["body"]  == 12
     assert wcag_rules["font_size"]["AAA"]["body"] == 14
+    assert wcag_rules["font_size"]["AA"]["axis_text"]  == 10
+    assert wcag_rules["font_size"]["AAA"]["axis_text"] == 12
 
 
 def test_palette_constants_cover_families():
