@@ -1,3 +1,8 @@
+# a11yviz 0.1.8
+
+* Mobile stylesheet leaves body typography to the user theme instead of shrinking it.
+* Tabs and nav links keep the tap-target floor at narrow widths.
+
 # a11yviz 0.1.7
 
 * Theme keeps title, axis title, and legend at the body floor while axis tick text sits two points smaller.
