@@ -13,11 +13,11 @@ def a11y_wcag_url(criterion: Union[str, Sequence[str]]):
     Parameters
     ----------
     criterion
-        Character vector of success-criterion numbers (e.g., "1.4.3"). Recognised values are the chart-relevant subset returned by a11y_rubric().
+        Character vector of success-criterion numbers (e.g., "1.4.3"). Recognized values are the chart-relevant subset returned by a11y_rubric().
 
     Returns
     -------
-        Character vector of URLs the same length as criterion. Returns the spec root URL for unrecognised values.
+        Character vector of URLs the same length as criterion. Returns the spec root URL for unrecognized values.
     """
     if isinstance(criterion, str):
         return _url(criterion)

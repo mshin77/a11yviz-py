@@ -445,7 +445,7 @@ def test_a11y_check_palette_alpha_one_unchanged():
     assert rows[0]["alpha"] == 1.0
 
 
-def test_a11y_check_palette_alpha_half_grey():
+def test_a11y_check_palette_alpha_half_gray():
     rows = a11y_check_palette(["#000000"], bg="#ffffff", alpha=0.5)
     assert rows[0]["rendered"].lower() in {"#808080", "#7f7f7f"}
 

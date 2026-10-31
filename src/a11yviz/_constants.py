@@ -122,7 +122,7 @@ diverging = {
 sequential = {
     "cividis": {"source": "viridislite", "option": "cividis",
                 "safe_on": "both", "purpose": "gradient",
-                "notes": "viridisLite cividis. Readable in greyscale; spans the full lightness range."},
+                "notes": "viridisLite cividis. Readable in grayscale; spans the full lightness range."},
     "viridis": {"source": "viridislite", "option": "viridis",
                 "safe_on": "both", "purpose": "gradient",
                 "notes": "viridisLite viridis (Smith & van der Walt). Perceptually uniform default."},
