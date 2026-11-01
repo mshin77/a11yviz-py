@@ -48,6 +48,36 @@ wcag_rules = {
 }
 
 palettes = {
+    "dark2_a11y_8": {
+        "source": "literal",
+        "colors": ["#1B9E77", "#D95F02", "#7570B3", "#E7298A",
+                   "#5E8C1A", "#8B4513", "#B8860B", "#2C6FAC"],
+        "safe_on": "white",
+        "purpose": "both",
+        "notes": "Dark2 look with every color at 3:1 or more on white. Neighboring colors pass color-vision checks; teal and magenta look alike under red-green deficiency, so pair with shape or linetype.",
+    },
+    "dark2_strict_5": {
+        "source": "literal",
+        "colors": ["#1B9E77", "#D95F02", "#7570B3", "#8B4513", "#C2185B"],
+        "safe_on": "white",
+        "purpose": "both",
+        "notes": "Dark2-based set where every pair passes color-vision checks and 3:1 on white. Safest for overlapping scatter plots.",
+    },
+    "okabe_ito": {
+        "source": "literal",
+        "colors": ["#E69F00", "#56B4E9", "#009E73", "#0072B2",
+                   "#D55E00", "#CC79A7", "#000000"],
+        "safe_on": "labeled",
+        "purpose": "both",
+        "notes": "Okabe and Ito (2008) colorblind-safe set. Orange, sky blue and pink are below 3:1 on white -- pair with labels or outlines.",
+    },
+    "grayscale": {
+        "source": "literal",
+        "colors": ["#1A1A1A", "#595959", "#8C8C8C"],
+        "safe_on": "white",
+        "purpose": "both",
+        "notes": "Black-and-white print. All three at 3:1 or more on white. Pair with shape, linetype or hatch, since gray steps alone are hard to tell apart.",
+    },
     "dark2_8": {
         "source":   "rcolorbrewer",
         "palette":  "Dark2",

@@ -1,3 +1,9 @@
+# a11yviz 0.1.9
+
+* New default palette keeps the familiar look while meeting WCAG contrast on white.
+* More palette choices, including colorblind-safe and grayscale options.
+* Existing palettes still work.
+
 # a11yviz 0.1.8
 
 * Mobile stylesheet leaves body typography to the user theme instead of shrinking it.

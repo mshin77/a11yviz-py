@@ -7,7 +7,7 @@ from a11yviz._utils import check_level
 from a11yviz.a11y_palette import a11y_palette
 
 
-def a11y_layout(p, level: str = "AA", palette: Optional[str] = "dark2_8"):
+def a11y_layout(p, level: str = "AA", palette: Optional[str] = "dark2_a11y_8"):
     """Apply accessible layout to a plotly figure
 
     Parameters

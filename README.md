@@ -29,7 +29,7 @@ p = (ggplot(penguins.dropna(),
             aes("flipper_length_mm", "body_mass_g",
                 color="species", shape="species"))
      + geom_point()
-     + a11yviz.scale_color_a11y("dark2_8")
+     + a11yviz.scale_color_a11y("dark2_a11y_8")
      + labs(x="Flipper length (mm)", y="Body mass (g)"))
 
 a11yviz.a11y_alt_text(p, "Scatter of penguin body mass vs flipper length by species.")
@@ -41,4 +41,4 @@ Shin, M. (2026). *a11yviz: Accessibility toolkit for ggplot2, plotly, and
 Quarto* (R package version 0.1.8). <https://mshin77.github.io/a11yviz>
 
 Shin, M. (2026). *a11yviz: Accessibility toolkit for plotnine, plotly,
-and Quarto* (Python package version 0.1.8). <https://github.com/mshin77/a11yviz-py>
+and Quarto* (Python package version 0.1.9). <https://github.com/mshin77/a11yviz-py>

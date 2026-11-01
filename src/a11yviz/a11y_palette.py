@@ -6,14 +6,14 @@ from typing import Optional
 from a11yviz._constants import diverging, palettes, sequential
 
 
-def a11y_palette(name: str = "dark2_8", n: Optional[int] = None,
+def a11y_palette(name: str = "dark2_a11y_8", n: Optional[int] = None,
                  bg: Optional[str] = None) -> list[str]:
     """Discrete color palette (categorical)
 
     Parameters
     ----------
     name
-        Discrete palette name. Built-in: "dark2_8" (default, RColorBrewer Dark2), "set2_8" (RColorBrewer Set2), "paired_12" (RColorBrewer Paired), "aaa_5" (custom AAA-on-white set).
+        Discrete palette name. Built-in: "dark2_a11y_8" (default, Dark2 look at 3:1 on white), "dark2_strict_5", "okabe_ito", "grayscale", "dark2_8" (RColorBrewer Dark2), "set2_8" (RColorBrewer Set2), "paired_12" (RColorBrewer Paired), "aaa_5" (custom AAA-on-white set).
     n
         Optional number of colors. Defaults to the palette's full size (truncates from the start when smaller).
     bg
@@ -32,13 +32,13 @@ def a11y_palette(name: str = "dark2_8", n: Optional[int] = None,
     return list(colors)
 
 
-def a11y_palette_info(name: str = "dark2_8") -> dict:
+def a11y_palette_info(name: str = "dark2_a11y_8") -> dict:
     """Discrete palette metadata
 
     Parameters
     ----------
     name
-        Discrete palette name. Built-in: "dark2_8" (default, RColorBrewer Dark2), "set2_8" (RColorBrewer Set2), "paired_12" (RColorBrewer Paired), "aaa_5" (custom AAA-on-white set).
+        Discrete palette name. Built-in: "dark2_a11y_8" (default, Dark2 look at 3:1 on white), "dark2_strict_5", "okabe_ito", "grayscale", "dark2_8" (RColorBrewer Dark2), "set2_8" (RColorBrewer Set2), "paired_12" (RColorBrewer Paired), "aaa_5" (custom AAA-on-white set).
 
     Returns
     -------

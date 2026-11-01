@@ -182,6 +182,42 @@ def test_a11y_palette_aaa_5_literal():
     ]
 
 
+def test_default_palette_is_dark2_a11y_8():
+    import inspect
+    from a11yviz import a11y_layout, make_a11y
+    from a11yviz.scale_a11y import _scale_a11y_palette
+    assert a11y_palette() == [
+        "#1B9E77", "#D95F02", "#7570B3", "#E7298A",
+        "#5E8C1A", "#8B4513", "#B8860B", "#2C6FAC",
+    ]
+    assert _scale_a11y_palette(None, "AA") == "dark2_a11y_8"
+    assert inspect.signature(make_a11y).parameters["palette"].default == "dark2_a11y_8"
+    assert inspect.signature(a11y_layout).parameters["palette"].default == "dark2_a11y_8"
+
+
+def test_new_palettes_hold_exact_colors():
+    assert a11y_palette("dark2_strict_5") == [
+        "#1B9E77", "#D95F02", "#7570B3", "#8B4513", "#C2185B",
+    ]
+    assert a11y_palette("okabe_ito") == [
+        "#E69F00", "#56B4E9", "#009E73", "#0072B2",
+        "#D55E00", "#CC79A7", "#000000",
+    ]
+    assert a11y_palette("grayscale") == ["#1A1A1A", "#595959", "#8C8C8C"]
+
+
+def test_white_safe_palettes_reach_3_to_1():
+    from a11yviz import a11y_check_palette
+    for name in ("dark2_a11y_8", "dark2_strict_5", "grayscale"):
+        rows = a11y_check_palette(a11y_palette(name), level="AA-large")
+        assert all(r["status"] == "ok" for r in rows), name
+
+
+def test_old_palette_names_still_work():
+    for name in ("dark2_8", "set2_8", "paired_12", "aaa_5"):
+        assert len(a11y_palette(name)) > 0, name
+
+
 def test_a11y_palette_unknown():
     with pytest.raises(ValueError):
         a11y_palette("does_not_exist")

@@ -6,7 +6,7 @@ from a11yviz._utils import (
 from a11yviz.a11y_palette import a11y_palette
 
 
-def a11y_show_palette(name: str = "dark2_8", bg: str = "#ffffff",
+def a11y_show_palette(name: str = "dark2_a11y_8", bg: str = "#ffffff",
                       level: str = "AA"):
     """Visualize a palette with WCAG contrast overlay
 

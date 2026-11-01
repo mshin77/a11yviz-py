@@ -8,7 +8,7 @@ from a11yviz.scale_a11y import scale_color_a11y, scale_fill_a11y
 from a11yviz.theme_a11y import theme_a11y
 
 
-def make_a11y(p, level: str = "AA", palette: str = "dark2_8",
+def make_a11y(p, level: str = "AA", palette: str = "dark2_a11y_8",
               alt: Optional[str] = None):
     """One-shot accessibility wrapper
 
